@@ -8,7 +8,7 @@ IMAGE_INSTALL += " \
 	encfs \
         avahi-daemon \
 	avahi-autoipd \
-	packagegroup-gh-test \
+	packagegroup-pha-test \
 	"
 
 IMAGE_FEATURES += "ssh-server-dropbear"
