@@ -1,0 +1,29 @@
+--- git1/CMakeLists.txt	2016-04-07 10:04:07.603885161 -0500
++++ git2/CMakeLists.txt	2016-04-07 10:18:40.685508252 -0500
+@@ -20,7 +20,11 @@
+ else ()
+   if (CMAKE_COMPILER_IS_GNUCXX)
+     message ("Assuming that GNU CXX uses -std=c++11 flag for C++11 compatibility.")
+-    list(APPEND CMAKE_CXX_FLAGS "-std=c++11")
++    # This does **NOT** work as intended- it will screw up hard and fast, injecting a ";" in 
++    # front of the append you're making.  Bad, bad mojo...
++    #
++    # list(APPEND CMAKE_CXX_FLAGS "-std=c++11")
++    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+   else()
+     message ("No CMAKE C++11 check. If the build breaks, you're on your own.")
+   endif()
+@@ -39,6 +43,13 @@
+    endif()
+ endif()
+ 
++# Explicitly override the above RPATH stuff in our case.  We're doing cross-compilation
++# on Linux and we don't want any RPATH stuff with this for now because it's getting 
++# turned on for our build and it's setting /usr/lib in as an RPATH and OE/Bitbake doesn't
++# like that (and legitimately so...it's an override for the system library pathing. 
++set(CMAKE_SKIP_RPATH ON)
++
++
+ # Check for FUSE.
+ find_package (FUSE REQUIRED)
+ include_directories (${FUSE_INCLUDE_DIR})
