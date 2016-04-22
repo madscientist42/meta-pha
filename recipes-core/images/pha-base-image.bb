@@ -1,7 +1,7 @@
 # Base this image on rpi-hwup-image
 include recipes-core/images/core-image-minimal.bb
 
-# Bring in some of the pieces we need for a Guardhat base image...
+# Bring in some of the pieces we need for a PHA base image...
 IMAGE_INSTALL += " \
 	kernel-modules \
 	packagegroup-pha-test \
@@ -9,7 +9,6 @@ IMAGE_INSTALL += " \
 	encfs \
         avahi-daemon \
 	avahi-autoipd \
-	toxcore \
 	"
 
 IMAGE_FEATURES += "ssh-server-dropbear"
