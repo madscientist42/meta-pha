@@ -4,11 +4,12 @@ include recipes-core/images/core-image-minimal.bb
 # Bring in some of the pieces we need for a PHA base image...
 IMAGE_INSTALL += " \
 	kernel-modules \
-	packagegroup-pha-test \
 	fuse \
 	encfs \
         avahi-daemon \
 	avahi-autoipd \
+	iperf \
+	hostap-utils \	
 	"
 
 IMAGE_FEATURES += "ssh-server-dropbear"

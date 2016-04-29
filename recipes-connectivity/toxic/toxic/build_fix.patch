@@ -1,0 +1,21 @@
+From 0090e1d6e18fd52614db729d04c27bbe351f2ba5 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank.earl@flextronics.com>
+Date: Wed, 20 Apr 2016 15:33:34 -0500
+Subject: Nasty debugger patch...
+
+
+diff --git a/Makefile b/Makefile
+index 6781c60..fd72a7e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -58,6 +58,10 @@ OBJ := $(addprefix $(BUILD_DIR)/, $(OBJ))
+ # Targets
+ all: $(BUILD_DIR)/toxic
+ 
++test: 
++	@echo "$(CC) <--> $(CFLAGS)"
++
++
+ $(BUILD_DIR)/toxic: $(OBJ)
+ 	@echo "  LD    $(@:$(BUILD_DIR)/%=%)"
+ 	@$(CC) $(CFLAGS) -o $(BUILD_DIR)/toxic $(OBJ) $(LDFLAGS)
