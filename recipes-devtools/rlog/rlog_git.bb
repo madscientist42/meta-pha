@@ -12,6 +12,8 @@ SRC_URI = "\
 
 SRCREV = "040240df98ba5f9d581d556bde7692e0f5a8c217"
 
+
+
 # Builds with autotools...
-inherit autotools
+inherit autotools-brokensep
 
