@@ -1,15 +1,67 @@
-# Base this image on rpi-hwup-image
-include recipes-core/images/core-image-minimal.bb
+# A baseline console image with a few features specified...
 
-# Bring in some of the pieces we need for a PHA base image...
-IMAGE_INSTALL += " \
+IMAGE_FEATURES += "package-management splash"
+IMAGE_LINGUAS = "en-us"
+
+inherit core-image
+
+DEPENDS += "bcm2835-bootfiles"
+
+CORE_OS = " \
+	tzdata \
 	kernel-modules \
 	fuse \
 	encfs \
         avahi-daemon \
-	avahi-autoipd \
-	iperf \
-	hostap-utils \	
+	pkgconfig \
+	bash \
 	"
 
-IMAGE_FEATURES += "ssh-server-dropbear"
+WIFI_SUPPORT = " \
+	iw \
+	wireless-tools \
+	wpa-supplicant \
+	hostap-utils \	
+	hostapd \
+	"
+
+TEST_SUPPORT = " \
+	lua \
+	luajit \
+	nodejs \
+	nodejs-npm \
+	"
+
+EXTRA_TOOLS_INSTALL = " \
+	bc \
+	bzip2 \
+	devmem2 \
+	dhcp-client \
+	dosfstools \
+	ethtool \
+	findutils \
+	i2c-tools \
+	iftop \
+	iperf \
+	htop \
+	less \
+	nano \
+	procps \
+	rsync \
+	sysfsutils \
+	tcpdump \
+	unzip \
+	util-linux \
+	vim-tiny \
+	wget \
+	zip \
+	"
+
+IMAGE_INSTALL += " \
+	${CORE_OS} \
+	${EXTRA_TOOLS_INSTALL} \
+	${TEST_SUPPORT} \
+	${WIFI_SUPPORT} \
+	"
+
+
