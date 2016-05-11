@@ -46,6 +46,13 @@ EXTRA_TOOLS_INSTALL = " \
 	htop \
 	less \
 	nano \
+	openssh-ssh \
+	openssh-sshd \
+	openssh-scp \
+	openssh-sftp \
+	openssh-sftp-server \
+	openssh-misc \
+	openssh-keygen \
 	procps \
 	rsync \
 	sysfsutils \
