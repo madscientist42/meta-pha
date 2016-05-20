@@ -52,6 +52,4 @@ do_kernel_configme_append () {
 	cat ${WORKDIR}/.defconfig ${WORKDIR}/tmpconfig > ${WORKDIR}/defconfig
 }
 
-# Now that we actually have a wedger to put these changes in, let's slide it in before
-# the rest of the stuff in the linux-raspberrypi prelims...
-#addtask do_testmode_config_edits after kernel_configme before do_patch
+
