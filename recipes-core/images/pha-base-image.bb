@@ -42,7 +42,7 @@ EXTRA_TOOLS_INSTALL = " \
 	findutils \
 	i2c-tools \
 	iftop \
-	iperf \
+	iperf3 \
 	htop \
 	less \
 	nano \

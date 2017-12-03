@@ -6,6 +6,4 @@ require pha-base-image.bb
 IMAGE_INSTALL += " \
 	packagegroup-sdk-target \
 	kernel-devsrc \
-	rtl8812au \
-	rtl8822bu \
 	"
