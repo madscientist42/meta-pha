@@ -11,10 +11,13 @@ CORE_OS = " \
 	tzdata \
 	kernel-modules \
 	fuse \
-	encfs \
         avahi-daemon \
 	pkgconfig \
 	bash \
+	eudev \
+	udev-rules-rpi \
+	rtl8812au \
+	rtl8822bu \
 	"
 
 WIFI_SUPPORT = " \
@@ -26,10 +29,6 @@ WIFI_SUPPORT = " \
 	"
 
 TEST_SUPPORT = " \
-	lua \
-	luajit \
-	nodejs \
-	nodejs-npm \
 	"
 
 EXTRA_TOOLS_INSTALL = " \
