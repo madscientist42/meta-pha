@@ -5,7 +5,7 @@ IMAGE_LINGUAS = "en-us"
 
 inherit core-image
 
-DEPENDS += "bcm2835-bootfiles"
+DEPENDS_raspberrypi2 += "bcm2835-bootfiles"
 
 CORE_OS = " \
 	tzdata \
@@ -16,8 +16,10 @@ CORE_OS = " \
 	bash \
 	eudev \
 	udev-rules-rpi \
-	rtl8812au \
+	rtl8812au-aircrack-ng \
 	rtl8822bu \
+	rtl8192eu \
+	linux-firmware-ath9k \
 	"
 
 WIFI_SUPPORT = " \
@@ -61,6 +63,7 @@ EXTRA_TOOLS_INSTALL = " \
 	vim-tiny \
 	wget \
 	zip \
+	eudev \
 	"
 
 IMAGE_INSTALL += " \
