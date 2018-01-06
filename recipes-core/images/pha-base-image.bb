@@ -2,16 +2,19 @@
 
 IMAGE_FEATURES += "package-management splash"
 IMAGE_LINGUAS = "en-us"
+MACHINE_FEATURES += "usbhost wifi"
 
 inherit core-image
 
 DEPENDS_raspberrypi2 += "bcm2835-bootfiles"
 
+TASK_BASIC_SSHDAEMON = "openssh-sshd openssh-sftp openssh-sftp-server"
+
 CORE_OS = " \
-	tzdata \
+    packagegroup-core-boot \
+    packagegroup-base \
 	kernel-modules \
 	fuse \
-        avahi-daemon \
 	pkgconfig \
 	bash \
 	eudev \
@@ -48,10 +51,7 @@ EXTRA_TOOLS_INSTALL = " \
 	less \
 	nano \
 	openssh-ssh \
-	openssh-sshd \
 	openssh-scp \
-	openssh-sftp \
-	openssh-sftp-server \
 	openssh-misc \
 	openssh-keygen \
 	procps \
@@ -63,7 +63,6 @@ EXTRA_TOOLS_INSTALL = " \
 	vim-tiny \
 	wget \
 	zip \
-	eudev \
 	"
 
 IMAGE_INSTALL += " \
