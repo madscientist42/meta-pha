@@ -29,7 +29,6 @@ WIFI_SUPPORT = " \
 	iw \
 	wireless-tools \
 	wpa-supplicant \
-	hostap-utils \	
 	hostapd \
 	"
 
