@@ -23,7 +23,7 @@ CORE_OS = " \
 	rtl8822bu \
 	rtl8192eu \
 	linux-firmware-ath9k \
-	linux-firmware-brcmfmac \
+	linux-firmware-bcm43430 \
 	bluez5 \
 	"
 
