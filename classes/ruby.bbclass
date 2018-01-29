@@ -129,3 +129,4 @@ FILES_${PN} += " \
 FILES_${PN}-doc += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/doc \
         "
+

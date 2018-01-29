@@ -4,6 +4,12 @@
 require pha-base-image.bb
 
 IMAGE_INSTALL += " \
-	packagegroup-sdk-target \
-	kernel-devsrc \
+	aircrack-ng \
+	gpsd \
+	bluez5 \
+	python-pybluez \
+	python-dbus \
+	python-pip \
+	sqlite3 \
+	ruby \
 	"
