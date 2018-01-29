@@ -93,11 +93,11 @@ ruby_do_install() {
 	done
 
 	# create symlink from the gems bin directory to /usr/bin
+	if [ ! -d ${D}/${bindir} ]; then mkdir -p ${D}/${bindir}; fi
 	for i in ${D}/${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin/*; do
 		if [ -e "$i" ]; then
-			if [ ! -d ${D}/${bindir} ]; then mkdir -p ${D}/${bindir}; fi
 			b=`basename $i`
-			ln -sf ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin/$b ${D}/${bindir}/$b
+			ln -sf ../${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin/$b ${D}/${bindir}/$b
 		fi
 	done
 }
