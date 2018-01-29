@@ -11,8 +11,8 @@ DEPENDS_raspberrypi2 += "bcm2835-bootfiles"
 TASK_BASIC_SSHDAEMON = "openssh-sshd openssh-sftp openssh-sftp-server"
 
 CORE_OS = " \
-    packagegroup-core-boot \
-    packagegroup-base \
+	packagegroup-core-boot \
+	packagegroup-base \
 	kernel-modules \
 	fuse \
 	pkgconfig \
@@ -23,6 +23,8 @@ CORE_OS = " \
 	rtl8822bu \
 	rtl8192eu \
 	linux-firmware-ath9k \
+	linux-firmware-brcmfmac \
+	bluez5 \
 	"
 
 WIFI_SUPPORT = " \
