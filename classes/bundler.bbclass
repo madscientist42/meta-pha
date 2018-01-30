@@ -13,14 +13,14 @@ bundler_do_install() {
 	# declare RDEPENDS for any gems residing in the Bundler file's description
 	# because this will only package OUR project we've "bundled".  This will 
 	# require the respective Gems' metadata, obviously...
-	${STAGING_BINDIR_NATIVE}/bundler install
+	${RUBY_COMPILE_FLAGS} ${RECIPE_SYSROOT_NATIVE}/usr/bin/bundle install
 
 	# Just like with ruby.bbclass, create symlink from the gems bin directory to /usr/bin
 	if [ ! -d ${D}/${bindir} ]; then mkdir -p ${D}/${bindir}; fi
 	for i in ${D}/${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin/*; do
 		if [ -e "$i" ]; then
 			b=`basename $i`
-			ln -sf ../${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin/$b ${D}/${bindir}/$b
+			ln -sf ../lib/ruby/gems/${RUBY_GEM_VERSION}/bin/$b ${D}/${bindir}/$b
 		fi
 	done
 }
