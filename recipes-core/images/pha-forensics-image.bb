@@ -9,8 +9,6 @@ IMAGE_INSTALL += " \
 	python-pybluez \
 	python-dbus \
 	python-pip \
-	sqlite3 \
 	ruby \
-	bundler \
-	bluehydra \
+	gem-bundler \
 	"
