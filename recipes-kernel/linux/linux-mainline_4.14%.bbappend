@@ -5,5 +5,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
 # and using it...add a patch to fix the device tree problems.  This adds the ethernet
 # configuration on the Neo2 and adds the Neo2+ properly.
 SRC_URI += " \
-	file://0003-fully-enable-nanopi-neo2-and-neo2-plus.patch \
+	file://0004-enable-nanopi-neo2-neo2lus.patch \
 	"
