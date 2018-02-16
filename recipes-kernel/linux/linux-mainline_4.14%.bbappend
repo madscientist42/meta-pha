@@ -7,3 +7,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-4.14:"
 SRC_URI += " \
 	file://0004-enable-nanopi-neo2-neo2lus.patch \
 	"
+
+# Inherit a bit of additional behavior.  uImage support... (Sigh)
+inherit kernel-uimage
