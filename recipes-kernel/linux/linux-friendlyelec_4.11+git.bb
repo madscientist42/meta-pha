@@ -22,5 +22,5 @@ S = "${WORKDIR}/linux-${PV}"
 SRC_URI[md5sum] = "e1051f6b15d6399a5de2441dd4e15537"
 SRC_URI[sha256sum] = "ffc393a0c66f80375eacd3fb177b92e5c9daa07de0dcf947e925e049352e6142"
 
-SRC_URI = " git://github.com/friendlyarm/linux.git;protocol=https \
+SRC_URI = " git://github.com/friendlyarm/linux.git;protocol=https;branch=sunxi-4.11.y \
         "
