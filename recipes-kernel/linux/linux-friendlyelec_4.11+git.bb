@@ -8,7 +8,7 @@ inherit kernel
 
 require linux.inc
 
-KBRANCH = "sunxi-4.11.y"
+KBRANCH ?= "sunxi-4.11.y"
 SRCREV = "492574d41038623d5a41c623c033a30533a462a7"
 PV = "4.11+git${SRCPV}"
 
@@ -17,7 +17,7 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree"
 
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
-S = "${WORKDIR}/linux-${PV}"
+S = "${WORKDIR}/git"
 	
 SRC_URI[md5sum] = "e1051f6b15d6399a5de2441dd4e15537"
 SRC_URI[sha256sum] = "ffc393a0c66f80375eacd3fb177b92e5c9daa07de0dcf947e925e049352e6142"
