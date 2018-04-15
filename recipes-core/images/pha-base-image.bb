@@ -20,7 +20,6 @@ CORE_OS = " \
 	eudev \
 	udev-rules-rpi \
 	rtl8812au-aircrack-ng \
-	rtl8192eu \
 	linux-firmware-ath9k \
 	linux-firmware-bcm43430 \
 	bluez5 \
