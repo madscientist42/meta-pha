@@ -8,6 +8,8 @@ inherit kernel
 
 require linux.inc
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
+
 # Since we're not using git, this doesn't make a difference, but we need to fill
 # in something or kernel-yocto.bbclass will fail.
 KBRANCH ?= "master"
