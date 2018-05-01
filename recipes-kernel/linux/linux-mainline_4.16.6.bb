@@ -25,6 +25,6 @@ SRC_URI[md5sum] = "036169df65e9153b9ffc2c801522280e"
 SRC_URI[sha256sum] = "fa919108d37f6b5dec85ce3fde3bc76eabdfc93b0b8c8386878ad8fb46168a4b"
 
 SRC_URI = "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz \
-	00001-neo-plus2-fixes.patch \
+	file://00001-neo-plus2-fixes.patch \
         file://defconfig \
         "
