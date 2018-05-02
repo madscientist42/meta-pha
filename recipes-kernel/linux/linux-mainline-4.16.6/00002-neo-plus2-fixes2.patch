@@ -1,0 +1,70 @@
+From a043f57ef25ab4ceb782ede4574282b965315b0d Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Tue, 1 May 2018 08:32:14 -0400
+Subject: Additional GPIO fixes...
+
+This time, the spec file fails to set the pinmux at start and call out
+that for the WiFi power sequencing.  It doesn't work on the edge when
+the WiFi chip's not enabled even though you specify the kernel kickstart
+entry in the DTS.  Correcting...
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index 891dade..585ccf4 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -114,7 +114,8 @@
+ 	wifi_pwrseq: wifi_pwrseq {
+ 		compatible = "mmc-pwrseq-simple";
+ 		pinctrl-names = "default";
+-		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_LOW>; /* PL7 */
++		pinctrl-0 = <&wifi_en_npi>;
++		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_HIGH>; /* PL7 */
+ 		post-power-on-delay-ms = <200>;
+ 	};
+ };
+@@ -131,6 +132,14 @@
+ 	status = "okay";
+ };
+ 
++&ehci1 {
++	status = "okay";
++};
++
++&ehci2 {
++	status = "okay";
++};
++
+ &ehci3 {
+ 	status = "okay";
+ };
+@@ -190,6 +199,14 @@
+ 	status = "okay";
+ };
+ 
++&ohci1 {
++	status = "okay";
++};
++
++&ohci2 {
++	status = "okay";
++};
++
+ &ohci3 {
+ 	status = "okay";
+ };
+@@ -200,6 +217,15 @@
+ 	status = "okay";
+ };
+ 
++
++&r_pio {
++	wifi_en_npi: wifi_en_pin {
++		pins = "PL7";
++		function = "gpio_out";
++    };
++};
++
++
+ &usb_otg {
+ 	dr_mode = "host";
+ 	status = "okay";
