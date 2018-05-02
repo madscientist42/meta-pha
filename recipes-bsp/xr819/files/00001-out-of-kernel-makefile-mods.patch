@@ -1,0 +1,21 @@
+From 04e91fc17d0d57c55fc4a23b8fba87b95c1837b4 Mon Sep 17 00:00:00 2001
+From: Frank Earl <fearl@srtrl.com>
+Date: Wed, 2 May 2018 12:59:03 -0400
+Subject: Mod for building out-of-kernel build for the driver...
+
+
+diff --git a/Makefile b/Makefile
+index 80a9a14..d5f4b40 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ # Standalone Makefile - uncomment for out-of-tree compilation
+-#CONFIG_WLAN_VENDOR_XRADIO := m
+-#CONFIG_XRADIO_USE_EXTENSIONS := y
+-#CONFIG_XRADIO_WAPI_SUPPORT := n
++CONFIG_WLAN_VENDOR_XRADIO := m
++CONFIG_XRADIO_USE_EXTENSIONS := y
++CONFIG_XRADIO_WAPI_SUPPORT := n
+ 
+ # Kernel part
+ 
