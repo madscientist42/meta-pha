@@ -36,6 +36,7 @@ TEST_SUPPORT = " \
 	"
 
 EXTRA_TOOLS_INSTALL = " \
+	protobuf \
 	bc \
 	bzip2 \
 	devmem2 \
