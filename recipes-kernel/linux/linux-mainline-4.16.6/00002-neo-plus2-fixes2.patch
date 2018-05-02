@@ -18,7 +18,7 @@ index 891dade..585ccf4 100644
  		pinctrl-names = "default";
 -		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_LOW>; /* PL7 */
 +		pinctrl-0 = <&wifi_en_npi>;
-+		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_HIGH>; /* PL7 */
++		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_LOW>; /* PL7 */
  		post-power-on-delay-ms = <200>;
  	};
  };
