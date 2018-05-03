@@ -9,6 +9,7 @@ inherit core-image
 # Handle RPi2 boot support...
 DEPENDS_raspberrypi2 += "bcm2835-bootfiles"
 
+# Add a few SSH daemon packagings...
 TASK_BASIC_SSHDAEMON = "openssh-sshd openssh-sftp openssh-sftp-server"
 
 # BSP specific (Drivers, etc...) and core OS features here...
@@ -25,6 +26,7 @@ CORE_OS = " \
 	linux-firmware-ath9k \
 	linux-firmware-bcm43430 \
 	bluez5 \
+	batctl \
 	"
 
 # Higher-level network stuff, but not things like webservers (Those are 
