@@ -31,6 +31,11 @@ S = "${WORKDIR}/git"
 UBOOT_ENV_SUFFIX = "scr"
 UBOOT_ENV = "boot"
 
+# "Fix" things for Python 3.X support...this will periodically break but until 
+# we can un-pooch this build process so it can use stock U-Boot's build and
+# do the right things for this image, we'll live with it.
+BUILD_CFLAGS += "  -I${RECIPE_SYSROOT_NATIVE}/usr/include/python3.5m "
+
 EXTRA_OEMAKE += ' HOSTLDSHARED="${BUILD_CC} -shared ${BUILD_LDFLAGS} ${BUILD_CFLAGS}" '
 EXTRA_OEMAKE_append_sun50i = " BL31=${DEPLOY_DIR_IMAGE}/bl31.bin "
 
