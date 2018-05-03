@@ -4,7 +4,7 @@
 require pha-base-image.bb
 
 # Force the presence of specific tools in the host sysroot...
-DEPENDS = "protobuf python python3 ruby-native"
+DEPENDS = "python python3 ruby-native"
 
 IMAGE_INSTALL += " \
 	aircrack-ng \
@@ -14,4 +14,5 @@ IMAGE_INSTALL += " \
 	python-pip \
 	ruby \
 	gem-bundler \
+	nmap \
 	"
