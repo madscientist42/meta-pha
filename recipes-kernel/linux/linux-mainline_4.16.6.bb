@@ -33,6 +33,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz \
 	file://00000-build-with-openssl-native.patch \
 	file://00001-neo-plus2-fixes.patch \
 	file://00002-neo-plus2-fixes2.patch \
+	file://00003-neo-plus2-enable-bt-uart.patch \
         file://defconfig \
         "
 
