@@ -24,6 +24,7 @@ CORE_OS = " \
 	eudev \
 	udev-rules-rpi \
 	linux-firmware-ath9k \
+	linux-firmware-ath10k \
 	linux-firmware-bcm43430 \
 	bluez5 \
 	batctl \
