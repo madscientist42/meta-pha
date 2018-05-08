@@ -15,6 +15,6 @@ IMAGE_INSTALL += " \
 	python-dbus \
 	python-pip \
 	ruby \
-	gem-bundler \
+	bundler \
 	nmap \
 	"
