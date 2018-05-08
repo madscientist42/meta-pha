@@ -1,6 +1,6 @@
 # A baseline console image with a few features specified...
 
-IMAGE_FEATURES += "package-management splash"
+IMAGE_FEATURES += "package-management splash ssh-server-openssh"
 IMAGE_LINGUAS = "en-us"
 MACHINE_FEATURES += "usbhost wifi"
 
@@ -23,6 +23,7 @@ CORE_OS = " \
 	bash \
 	eudev \
 	udev-rules-rpi \
+	linux-firmware-ralink \
 	linux-firmware-ath9k \
 	linux-firmware-ath10k \
 	linux-firmware-bcm43430 \
