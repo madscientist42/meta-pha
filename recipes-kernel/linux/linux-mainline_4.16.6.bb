@@ -31,9 +31,7 @@ SRC_URI[sha256sum] = "fa919108d37f6b5dec85ce3fde3bc76eabdfc93b0b8c8386878ad8fb46
 
 SRC_URI = "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz \
 	file://00000-build-with-openssl-native.patch \
-	file://00001-neo-plus2-fixes.patch \
-	file://00002-neo-plus2-fixes2.patch \
-	file://00003-neo-plus2-enable-bt-uart.patch \
+	file://00001-neo-plus2-devicetree-fixes.patch \
         file://defconfig \
         "
 

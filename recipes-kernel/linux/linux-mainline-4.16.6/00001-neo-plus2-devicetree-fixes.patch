@@ -1,0 +1,120 @@
+From 55a921edbca3ae5ca1ba3e62373f707d8ad19d56 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Tue, 1 May 2018 08:00:57 -0400
+Subject: GPIO Fixes.
+
+Don't have a clue what they were thinking (Suggest the Linux-Sunxi dev
+that came up with this device tree spec file look at the schematics
+next time...sigh...) but it's now moved to the right GPIO pins for
+a NanoPI class device (all of them use this pin on H-series SoC's)
+and turned on Heartbeat support for the same...
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index 1ed9f21..891dade 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -72,7 +72,8 @@
+ 
+ 		status {
+ 			label = "nanopi:red:status";
+-			gpios = <&pio 0 20 GPIO_ACTIVE_HIGH>;
++			gpios = <&pio 0 10 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
+ 		};
+ 	};
+ 
+From a043f57ef25ab4ceb782ede4574282b965315b0d Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Tue, 1 May 2018 08:32:14 -0400
+Subject: Additional GPIO fixes...
+
+This time, the spec file fails to set the pinmux at start and call out
+that for the WiFi power sequencing.  It doesn't work on the edge when
+the WiFi chip's not enabled even though you specify the kernel kickstart
+entry in the DTS.  Correcting...
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index 891dade..585ccf4 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -114,7 +114,8 @@
+ 	wifi_pwrseq: wifi_pwrseq {
+ 		compatible = "mmc-pwrseq-simple";
+ 		pinctrl-names = "default";
+-		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_LOW>; /* PL7 */
++		pinctrl-0 = <&wifi_en_npi>;
++		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_LOW>; /* PL7 */
+ 		post-power-on-delay-ms = <200>;
+ 	};
+ };
+@@ -131,6 +132,14 @@
+ 	status = "okay";
+ };
+ 
++&ehci1 {
++	status = "okay";
++};
++
++&ehci2 {
++	status = "okay";
++};
++
+ &ehci3 {
+ 	status = "okay";
+ };
+@@ -190,6 +199,14 @@
+ 	status = "okay";
+ };
+ 
++&ohci1 {
++	status = "okay";
++};
++
++&ohci2 {
++	status = "okay";
++};
++
+ &ohci3 {
+ 	status = "okay";
+ };
+@@ -200,6 +217,15 @@
+ 	status = "okay";
+ };
+ 
++
++&r_pio {
++	wifi_en_npi: wifi_en_pin {
++		pins = "PL7";
++		function = "gpio_out";
++    };
++};
++
++
+ &usb_otg {
+ 	dr_mode = "host";
+ 	status = "okay";
+From 0b7c0c142a8c979b572bbdfdb3585c62a2922dd1 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Fri, 4 May 2018 08:12:44 -0400
+Subject: Turn on BT UART...
+
+Stock, the config doesn't turn it on- so we're going to do that rather
+than making the userland set everything up (Annoying...)
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index 6081035..691ea92 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -217,6 +217,12 @@
+ 	status = "okay";
+ };
+ 
++&uart3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart3_pins>, <&uart3_rts_cts_pins>;
++	status = "okay";
++};
++
+ 
+ &r_pio {
+ 	wifi_en_npi: wifi_en_pin {
