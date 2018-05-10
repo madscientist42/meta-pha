@@ -17,7 +17,6 @@ CORE_OS = " \
 	packagegroup-core-boot \
 	packagegroup-base \
 	kernel-modules \
-	rtl8812au-aircrack-ng \
 	fuse \
 	pkgconfig \
 	bash \
