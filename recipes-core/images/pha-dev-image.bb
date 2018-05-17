@@ -6,4 +6,6 @@ require pha-base-image.bb
 IMAGE_INSTALL += " \
 	packagegroup-sdk-target \
 	kernel-devsrc \
+	go \
+	go-helloworld \
 	"
