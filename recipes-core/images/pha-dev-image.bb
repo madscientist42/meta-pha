@@ -13,6 +13,7 @@ IMAGE_INSTALL += " \
 	packagegroup-core-tools-testapps \
 	packagegroup-sdk-target \
 	kernel-devsrc \
+	glibc-dev \
 	go \
 	packagegroup-go-sdk-target \
 	go-helloworld \
