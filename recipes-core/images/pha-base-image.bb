@@ -38,6 +38,7 @@ NET_SUPPORT = " \
 	openssh-ssh \
 	openssh-scp \
 	openssh-sftp \
+	openssh-sftp-server \
 	openssh-misc \
 	openssh-keygen \
 	tcpdump \
