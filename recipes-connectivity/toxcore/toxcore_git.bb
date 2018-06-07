@@ -14,7 +14,7 @@ SRC_URI = "\
 	  git://github.com/irungentoo/toxcore.git;protocol=https \
           "
 
-SRCREV = "532629d486e3361c7d8d95b38293cc7d61dc4ee5"
+SRCREV = "fda74a8454a028c9ec063f0074062e19fd25f7e7"
 
 # Builds with autotools...
 inherit autotools
