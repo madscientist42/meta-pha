@@ -9,9 +9,6 @@ inherit core-image
 # Handle RPi2 boot support...
 DEPENDS_raspberrypi2 += "bcm2835-bootfiles"
 
-# Add a few SSH daemon packagings...
-TASK_BASIC_SSHDAEMON = "openssh-sshd openssh-sftp openssh-sftp-server"
-
 # BSP specific (Drivers, etc...) and core OS features here...
 CORE_OS = " \
 	packagegroup-core-boot \
@@ -26,9 +23,6 @@ CORE_OS = " \
 	linux-firmware-ath9k \
 	linux-firmware-ath10k \
 	linux-firmware-bcm43430 \
-	rtl8812au-aircrack-ng \
-	rtl8822bu \
-	rtl8814au \
 	bluez5 \
 	batctl \
 	"
@@ -40,6 +34,8 @@ NET_SUPPORT = " \
 	dhcp-client \
 	openssh-ssh \
 	openssh-scp \
+	openssh-sftp \
+	openssh-sftp-server \
 	openssh-misc \
 	openssh-keygen \
 	tcpdump \
