@@ -23,6 +23,9 @@ CORE_OS = " \
 	linux-firmware-ath9k \
 	linux-firmware-ath10k \
 	linux-firmware-bcm43430 \
+	rtl8812au-aircrack-ng \
+	rtl8822bu \
+	rtl8814au \
 	bluez5 \
 	batctl \
 	"
