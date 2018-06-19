@@ -16,9 +16,10 @@ KERNEL_EXTRA_ARGS += " \
     STAGING_INCDIR_NATIVE=${STAGING_INCDIR_NATIVE} \
     "
 
-# And something that should've been copied OVER by kernel.bbclass that **ISN'T**...
-do_compile_append() {
-    install -d ${STAGING_KERNEL_BUILDDIR}/include
-    install -d ${STAGING_KERNEL_BUILDDIR}/include/config
-    cp -f ${B}/include/config/auto.conf ${STAGING_KERNEL_BUILDDIR}/include/config
+# FIXME - This is a *NASTY* hack, but it fixes a shortfall of the
+# recipe stages that fill the shared kernel artifacts set- which 
+# require auto.conf from include/conf in the BUILD environment from
+# the kernel.
+do_compile_kernelmodules_append() {
+    cp -rf ${WORKDIR}/build/* ${STAGING_KERNEL_BUILDDIR}
 }
