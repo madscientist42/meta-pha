@@ -21,6 +21,9 @@ CORE_OS = " \
 	udev-rules-rpi \
 	linux-firmware-ralink \
 	linux-firmware-bcm43430 \
+	rtl8812au-aircrack-ng \
+	rtl8822bu \
+	rtl8814au \
 	bluez5 \
 	batctl \
 	"

@@ -16,3 +16,9 @@ KERNEL_EXTRA_ARGS += " \
     STAGING_INCDIR_NATIVE=${STAGING_INCDIR_NATIVE} \
     "
 
+# And something that should've been copied OVER by kernel.bbclass that **ISN'T**...
+do_compile_append() {
+    install -d ${STAGING_KERNEL_BUILDDIR}/include
+    install -d ${STAGING_KERNEL_BUILDDIR}/include/config
+    cp -f ${B}/include/config/auto.conf ${STAGING_KERNEL_BUILDDIR}/include/config
+}
