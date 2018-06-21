@@ -22,6 +22,8 @@ CORE_OS = " \
 	linux-firmware-ralink \
 	linux-firmware-bcm43430 \
 	rtl8812au-aircrack-ng \
+	rtl8814au-aircrack-ng \
+	rtl8822bu \
 	bluez5 \
 	batctl \
 	"
