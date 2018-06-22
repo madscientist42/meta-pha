@@ -21,3 +21,6 @@ do_configure_prepend() {
         NOCONFIGURE=yes ./autogen.sh
         cd ${B}
 }
+
+# Provide this to the SDK for inclusion if it's specified in the populate task list...
+BBCLASSEXTEND += "native nativesdk"

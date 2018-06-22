@@ -15,10 +15,13 @@ SRCREV = "24daccad117311f308d7df4fae4b21d997770452"
 # Builds with autotools...
 inherit autotools
 
-
 # But, use the autogen.sh scripting first...
 do_configure_prepend() {
         cd ${S}
         NOCONFIGURE=yes ./autogen.sh
         cd ${B}
 }
+
+# Provide this to the SDK for inclusion if it's specified in the populate task list...
+BBCLASSEXTEND += "native nativesdk"
+
