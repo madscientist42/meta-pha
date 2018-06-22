@@ -26,6 +26,7 @@ CORE_OS = " \
 	rtl8822bu \
 	bluez5 \
 	batctl \
+	boost \
 	"
 
 # Higher-level network stuff, but not things like webservers (Those are 
@@ -84,5 +85,12 @@ IMAGE_INSTALL += " \
 	${NET_SUPPORT} \
 	${WIFI_SUPPORT} \
 	"
+	
+# Make our cross-compile chain include these things, just in case...	
+TOOLCHAIN_HOST_TASK += " \
+    nativesdk-boost \
+    nativesdk-rpe-tools \
+    "
+	    
 
 
