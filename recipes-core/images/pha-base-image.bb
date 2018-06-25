@@ -89,7 +89,8 @@ IMAGE_INSTALL += " \
 # Make our cross-compile chain include these things, just in case...	
 TOOLCHAIN_HOST_TASK += " \
     nativesdk-boost \
-    nativesdk-rpe-tools \
+    rpe-tools \
+    rpe-tools-dev \
     "
 	    
 

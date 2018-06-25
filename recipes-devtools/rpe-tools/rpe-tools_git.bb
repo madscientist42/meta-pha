@@ -17,9 +17,22 @@ SRCREV = "cbb7f20306dc66c4ddf84f590a2cea83973567b6"
 
 inherit cmake
 
-# Provide this to the SDK for inclusion if it's specified in the populate task list...
+PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
+
+FILES_${PN} = " \
+    /usr/lib/librpetools.so \
+    "
+    
+FILES_${PN}-dev = " \
+    /usr/include/* \
+    "
+ 
+FILES_${PN}-dbg = " \
+    /usr/src/debug/* \
+    /usr/lib/.debug/* \
+    "
+    
+# Make it available for tooling...    
 BBCLASSEXTEND += "native nativesdk"
 
-# For now, until I can figure out why it's doing this...make dev-elf fall under
-# a known INSANE state...
-INSANE_SKIP_${PN}-dev += "dev-elf"
+
