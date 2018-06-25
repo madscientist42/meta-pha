@@ -27,6 +27,7 @@ CORE_OS = " \
 	bluez5 \
 	batctl \
 	boost \
+	rpe-tools \
 	"
 
 # Higher-level network stuff, but not things like webservers (Those are 
@@ -89,8 +90,6 @@ IMAGE_INSTALL += " \
 # Make our cross-compile chain include these things, just in case...	
 TOOLCHAIN_HOST_TASK += " \
     nativesdk-boost \
-    rpe-tools \
-    rpe-tools-dev \
     "
 	    
 

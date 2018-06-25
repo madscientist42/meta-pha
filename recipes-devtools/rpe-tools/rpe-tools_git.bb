@@ -20,7 +20,7 @@ inherit cmake
 PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
 
 FILES_${PN} = " \
-    /usr/lib/librpetools.so \
+    /usr/lib/*.so \
     "
     
 FILES_${PN}-dev = " \
@@ -33,6 +33,6 @@ FILES_${PN}-dbg = " \
     "
     
 # Make it available for tooling...    
-BBCLASSEXTEND += "native nativesdk"
+BBCLASSEXTEND += "native"
 
 
