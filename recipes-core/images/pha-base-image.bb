@@ -26,6 +26,8 @@ CORE_OS = " \
 	rtl8822bu \
 	bluez5 \
 	batctl \
+	boost \
+	rpe-tools \
 	"
 
 # Higher-level network stuff, but not things like webservers (Those are 
