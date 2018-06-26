@@ -13,7 +13,7 @@ SRC_URI = " \
     git://github.com/madscientist42/rpe_tools.git;protocol=https \
     "
 
-SRCREV = "cbb7f20306dc66c4ddf84f590a2cea83973567b6"
+SRCREV = "5d6879d6689f6235b9e0a8f5e242e4ee0dc3e2cc"
 
 inherit cmake
 
@@ -31,6 +31,9 @@ FILES_${PN}-dbg = " \
     /usr/src/debug/* \
     /usr/lib/.debug/* \
     "
+
+# Turn on the SysFSGPIO class support, and turn Boost support off...
+EXTRA_OECMAKE += " -DPROVIDE_SysFSGPIO=ON -DUSE_BOOST=OFF"
     
 # Make it available for tooling...    
 BBCLASSEXTEND += "native"
