@@ -32,8 +32,9 @@ FILES_${PN}-dbg = " \
     /usr/lib/.debug/* \
     "
 
-# Turn on the SysFSGPIO class support, and turn Boost support off...
-EXTRA_OECMAKE += " -DPROVIDE_SysFSGPIO=ON -DUSE_BOOST=OFF"
+# Turn on the SysFSGPIO class support, and turn Boost support off, use
+# the internal tinythread++ framework instead of C++11's threads...
+EXTRA_OECMAKE += " -DPROVIDE_SysFSGPIO=ON -DUSE_BOOST=OFF -DUSE_TINYTHREAD=ON"
     
 # Make it available for tooling...    
 BBCLASSEXTEND += "native"
