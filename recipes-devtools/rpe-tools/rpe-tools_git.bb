@@ -4,16 +4,13 @@ SECTION = "devel/libs"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ab2b616c85c52a8640d3907ffcaf0469"
 
-DEPENDS = "boost"
-RDEPENDS_${PN} = "boost"
-
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
     git://github.com/madscientist42/rpe_tools.git;protocol=https \
     "
 
-SRCREV = "949c0650256d724b27f2e25686165086afaa2696"
+SRCREV = "80694f84095f1bf27faebecdeebb862caaaf31bf"
 
 inherit cmake
 
@@ -32,9 +29,11 @@ FILES_${PN}-dbg = " \
     /usr/lib/.debug/* \
     "
 
-# Turn on the SysFSGPIO class support, and turn Boost support off, use
-# the internal tinythread++ framework instead of C++11's threads...
-EXTRA_OECMAKE += " -DPROVIDE_SysFSGPIO=ON -DUSE_BOOST=OFF"
+# Turn on the SysFSGPIO class support, and turn Boost support off.
+# This makes for smallest footprint on things.  Boost is a gem, but 
+# it adds a bit of bloat we're not needing the support out of right
+# now...
+EXTRA_OECMAKE += " -DPROVIDE_SysFSGPIO=ON -DUSE_BOOST=OFF -DUSE_TINYTHREAD=off"
     
 # Make it available for tooling...    
 BBCLASSEXTEND += "native"
