@@ -13,7 +13,7 @@ SRC_URI = " \
     git://github.com/madscientist42/rpe_tools.git;protocol=https \
     "
 
-SRCREV = "e2086858a17be064cd1e812ccfea05cb1c010aec"
+SRCREV = "949c0650256d724b27f2e25686165086afaa2696"
 
 inherit cmake
 
