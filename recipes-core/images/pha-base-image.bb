@@ -29,6 +29,7 @@ CORE_OS = " \
 	boost \
 	rpe-tools \
 	brcm-patchram-plus \
+	ap6212-bt-firmware \
 	"
 
 # Higher-level network stuff, but not things like webservers (Those are 
