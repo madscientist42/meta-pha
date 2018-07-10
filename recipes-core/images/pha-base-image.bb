@@ -28,6 +28,7 @@ CORE_OS = " \
 	batctl \
 	boost \
 	rpe-tools \
+	brcm-patchram-plus \
 	"
 
 # Higher-level network stuff, but not things like webservers (Those are 
