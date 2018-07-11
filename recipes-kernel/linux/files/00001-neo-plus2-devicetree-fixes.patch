@@ -217,3 +217,186 @@ index d9101a1..ccfc149 100644
  	uart2_rts_cts_pins: uart2_rts_cts {
  		pins = "PA2", "PA3";
  		function = "uart2";
+From 9b6a8315c15b6182237decfbb9ff155094976857 Mon Sep 17 00:00:00 2001
+From: Frank Earl <linusti@gmail.com>
+Date: Wed, 11 Jul 2018 13:29:49 -0400
+Subject: A real attempt at adding CPU speed/thermal governors
+
+This addes a System ID and adds the support of speeds and
+thermal throttling of the same.  This should lower power
+consumption and add defensive functions for thermal conditions.
+
+diff --git a/arch/arm/boot/dts/sunxi-h3-h5.dtsi b/arch/arm/boot/dts/sunxi-h3-h5.dtsi
+index 7a83b1522..58e032a71 100644
+--- a/arch/arm/boot/dts/sunxi-h3-h5.dtsi
++++ b/arch/arm/boot/dts/sunxi-h3-h5.dtsi
+@@ -732,5 +732,25 @@
+ 				function = "s_cir_rx";
+ 			};
+ 		};
++
++	    sid: eeprom@01c14000 {
++		    compatible = "allwinner,sun8i-h3-sid";
++		    reg = <0x01c14000 0x400>;
++	    };
++
++		ths: ths@1c25000 {
++			compatible = "allwinner,sun8i-a33-ths";
++			reg = <0x01c25000 0x100>;
++			#thermal-sensor-cells = <0>;
++			#io-channel-cells = <0>;
++		};
++
++        thermal-zones {
++	        cpu_thermal: cpu_thermal {
++		        polling-delay-passive = <330>;
++		        polling-delay = <1000>;
++		        thermal-sensors = <&ths 0>;
++            };
++        };
+ 	};
+ };
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index 51349fc52..77145447e 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -47,6 +47,7 @@
+ #include <dt-bindings/gpio/gpio.h>
+ #include <dt-bindings/input/input.h>
+ #include <dt-bindings/pinctrl/sun4i-a10.h>
++#include <dt-bindings/thermal/thermal.h>
+
+ / {
+ 	model = "FriendlyARM NanoPi NEO Plus2";
+@@ -98,6 +99,7 @@
+ 	vdd_cpux: gpio-regulator {
+ 		compatible = "regulator-gpio";
+ 		pinctrl-names = "default";
++		pinctrl-0 = <&vdd_cpux_r_npi>;
+ 		regulator-name = "vdd-cpux";
+ 		regulator-type = "voltage";
+ 		regulator-boot-on;
+@@ -131,6 +133,64 @@
+ 	};
+ };
+
++&cpu0 {
++	operating-points = <
++		1248000 1300000
++		1008000	1100000
++		816000	1100000
++		624000	1100000
++		480000	1100000
++		312000	1100000
++		240000	1100000
++		120000	1100000
++		>;
++	#cooling-cells = <2>;
++	cooling-min-level = <0>;
++	cooling-max-level = <7>;
++	cpu0-supply = <&vdd_cpux>;
++};
++
++&cpu_thermal {
++    trips {
++        cpu_warm: cpu_warm {
++	        temperature = <65000>;
++	        hysteresis = <2000>;
++	        type = "passive";
++        };
++        cpu_hot: cpu_hot {
++	        temperature = <75000>;
++	        hysteresis = <2000>;
++	        type = "passive";
++        };
++        cpu_very_hot: cpu_very_hot {
++	        temperature = <90000>;
++	        hysteresis = <2000>;
++	        type = "passive";
++        };
++        cpu_crit: cpu_crit {
++	        temperature = <105000>;
++	        hysteresis = <2000>;
++	        type = "critical";
++        };
++    };
++
++    cooling-maps {
++        cpu_warm_limit_cpu {
++	        trip = <&cpu_warm>;
++	        cooling-device = <&cpu0 THERMAL_NO_LIMIT 1>;
++        };
++        cpu_hot_limit_cpu {
++	        trip = <&cpu_hot>;
++	        cooling-device = <&cpu0 2 3>;
++        };
++        cpu_very_hot_limit_cpu {
++	        trip = <&cpu_very_hot>;
++	        cooling-device = <&cpu0 5 THERMAL_NO_LIMIT>;
++        };
++    };
++};
++
++
+ &codec {
+ 	allwinner,audio-routing =
+ 		"Line Out", "LINEOUT",
+@@ -259,6 +319,13 @@
+ };
+
+ &r_pio {
++	vdd_cpux_r_npi: regulator_pins@0 {
++		pins = "PL6";
++		function = "gpio_out";
++		drive = <SUN4I_PINCTRL_10_MA>;
++		pull = <SUN4I_PINCTRL_NO_PULL>;
++	};
++
+ 	wifi_en_npi: wifi_en_pin {
+ 		pins = "PL7";
+ 		function = "gpio_out";
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi
+index e237c05cf..deec4cdf2 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi
+@@ -47,11 +47,14 @@
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+
+-		cpu@0 {
++		cpu0: cpu@0 {
+ 			compatible = "arm,cortex-a53", "arm,armv8";
+ 			device_type = "cpu";
+ 			reg = <0>;
+ 			enable-method = "psci";
++			clocks = <&ccu CLK_CPUX>;
++			clock-latency = <244144>; /* 8 32k periods */
++			clock-frequency = <1200000000>;
+ 		};
+
+ 		cpu@1 {
+@@ -59,6 +62,7 @@
+ 			device_type = "cpu";
+ 			reg = <1>;
+ 			enable-method = "psci";
++			clock-frequency = <1200000000>;
+ 		};
+
+ 		cpu@2 {
+@@ -66,6 +70,7 @@
+ 			device_type = "cpu";
+ 			reg = <2>;
+ 			enable-method = "psci";
++			clock-frequency = <1200000000>;
+ 		};
+
+ 		cpu@3 {
+@@ -73,6 +78,7 @@
+ 			device_type = "cpu";
+ 			reg = <3>;
+ 			enable-method = "psci";
++			clock-frequency = <1200000000>;
+ 		};
+ 	};
+
+
