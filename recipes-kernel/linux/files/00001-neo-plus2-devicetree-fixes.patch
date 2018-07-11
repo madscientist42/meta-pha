@@ -192,3 +192,28 @@ index 84116eb..c7043f0 100644
  
  &codec {
 
+
+From f095b5b545ef9e99d828788826a31fc24427fb9f Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Wed, 11 Jul 2018 10:02:54 -0400
+Subject: Add rfkill GPIO node.
+
+Helps if you have the node you refer to in the .dts or a .dtsi, doesn't
+it?
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index d9101a1..ccfc149 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -258,6 +258,11 @@
+ };
+ 
+ &pio {
++	bt_pwr_pin: bt_pwr_pin@0 {
++		pins = "PG13";
++		function = "gpio_out";
++	};
++
+ 	uart2_rts_cts_pins: uart2_rts_cts {
+ 		pins = "PA2", "PA3";
+ 		function = "uart2";
