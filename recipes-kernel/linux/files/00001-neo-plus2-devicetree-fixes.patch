@@ -118,3 +118,152 @@ index 6081035..691ea92 100644
  
  &r_pio {
  	wifi_en_npi: wifi_en_pin {
+From 128968281e3f8baad77a34cb04ce5fadc7713395 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Wed, 11 Jul 2018 08:15:34 -0400
+Subject: Add all the UARTs like FriendlyElec did for their Ubuntu Build.
+
+This includes adding the CTS/RTS for the third UART.  You'd think that
+people would transpose this stuff, but NOoooooo...  X-D
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index 691ea92..84116eb 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -217,12 +217,30 @@
+ 	status = "okay";
+ };
+ 
++&uart1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart1_pins>, <&uart1_rts_cts_pins>;
++	status = "okay";
++};
++
++&uart2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart2_pins>, <&uart2_rts_cts_pins>;
++	status = "okay";
++};
++
+ &uart3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart3_pins>, <&uart3_rts_cts_pins>;
+ 	status = "okay";
+ };
+ 
++&pio {
++	uart2_rts_cts_pins: uart2_rts_cts {
++		pins = "PA2", "PA3";
++		function = "uart2";
++	};	
++};
+ 
+ &r_pio {
+ 	wifi_en_npi: wifi_en_pin {
+From 68d9884acdcf110e8041b929271b9947e469f2e3 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Wed, 11 Jul 2018 08:25:28 -0400
+Subject: Add rfkill spec for the BT core...
+
+Suspect that the reset behavior is not properly enforced without this
+making it just simply NOT work on the distribution.
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index 84116eb..c7043f0 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -118,6 +118,17 @@
+ 		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_LOW>; /* PL7 */
+ 		post-power-on-delay-ms = <200>;
+ 	};
++
++	rfkill_bt {
++		compatible = "rfkill-gpio";
++		pinctrl-names = "default";
++		pinctrl-0 = <&bt_pwr_pin>;
++		reset-gpios = <&pio 6 13 GPIO_ACTIVE_HIGH>; /* PG13 */
++		clocks = <&osc32k>;
++		clock-frequency = <32768>;
++		rfkill-name = "sunxi-bt";
++		rfkill-type = "bluetooth";
++	};
+ };
+ 
+ &codec {
+From 65a303b5162c8fe178ab34143c869c009e6330f9 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Wed, 11 Jul 2018 08:27:56 -0400
+Subject: Add the speed/temp governor hooks from the FriendlyElec kernel
+
+This way we've got most, if not all the same behaviors there....
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index c7043f0..7d7ce8f 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -131,6 +131,64 @@
+ 	};
+ };
+ 
++&cpu0 {
++	operating-points = <
++		1248000 1300000
++		1008000	1100000
++		816000	1100000
++		624000	1100000
++		480000	1100000
++		312000	1100000
++		240000	1100000
++		120000	1100000
++		>;
++	#cooling-cells = <2>;
++	cooling-min-level = <0>;
++	cooling-max-level = <7>;
++	cpu0-supply = <&vdd_cpux>;
++};
++
++&cpu_thermal {
++	trips {
++		cpu_warm: cpu_warm {
++			temperature = <65000>;
++			hysteresis = <2000>;
++			type = "passive";
++		};
++		cpu_hot: cpu_hot {
++			temperature = <75000>;
++			hysteresis = <2000>;
++			type = "passive";
++		};
++		cpu_very_hot: cpu_very_hot {
++			temperature = <90000>;
++			hysteresis = <2000>;
++			type = "passive";
++		};
++		cpu_crit: cpu_crit {
++			temperature = <105000>;
++			hysteresis = <2000>;
++			type = "critical";
++		};
++	};
++
++	cooling-maps {
++		cpu_warm_limit_cpu {
++			trip = <&cpu_warm>;
++			cooling-device = <&cpu0 THERMAL_NO_LIMIT 1>;
++		};
++		cpu_hot_limit_cpu {
++			trip = <&cpu_hot>;
++			cooling-device = <&cpu0 2 3>;
++		};
++		cpu_very_hot_limit_cpu {
++			trip = <&cpu_very_hot>;
++			cooling-device = <&cpu0 5 THERMAL_NO_LIMIT>;
++		};
++	};
++};
++
++
+ &codec {
+ 	allwinner,audio-routing =
+ 		"Line Out", "LINEOUT",
