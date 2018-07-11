@@ -79,6 +79,7 @@ EXTRA_TOOLS_INSTALL = " \
 	vim-tiny \
 	wget \
 	zip \
+	gpsd \
 	"
 
 IMAGE_INSTALL += " \

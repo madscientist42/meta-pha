@@ -6,7 +6,6 @@ DEPENDS = "python python3 ruby-native"
 
 IMAGE_INSTALL += " \
 	aircrack-ng \
-	gpsd \
 	python \
 	python3 \
 	python-pybluez \
