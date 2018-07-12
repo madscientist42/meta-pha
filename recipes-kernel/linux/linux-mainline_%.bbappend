@@ -8,6 +8,7 @@ DEPENDS += "openssl-native"
 SRC_URI += " \
 	file://00000-build-with-openssl-native.patch \
 	file://00001-neo-plus2-devicetree-fixes.patch \
+	file://00002-rfkill-gpio.patch \
     "    
 
 # Some of the extra build hints...

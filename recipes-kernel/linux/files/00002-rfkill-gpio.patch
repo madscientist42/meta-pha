@@ -1,0 +1,98 @@
+From ea47ea16584861dd30c29f8f7c4178a08c32571c Mon Sep 17 00:00:00 2001
+From: Frank Earl <fearl@srtrl.com>
+Date: Thu, 12 Jul 2018 16:04:27 -0400
+Subject: Patch rfkill-gpio.c to match linux-sunxi/FriendlyElec version.
+
+Not upstreamed as CLAIMED by either party.  (Why am I surprised?  Oh,
+wait...)  So, we'll patch it as a feature of meta-pha's build steps.
+
+diff --git a/net/rfkill/rfkill-gpio.c b/net/rfkill/rfkill-gpio.c
+index 00192a996..66acd0455 100644
+--- a/net/rfkill/rfkill-gpio.c
++++ b/net/rfkill/rfkill-gpio.c
+@@ -35,7 +35,7 @@ struct rfkill_gpio_data {
+ 
+ 	struct rfkill		*rfkill_dev;
+ 	struct clk		*clk;
+-
++	int             clk_frequency; 
+ 	bool			clk_enabled;
+ };
+ 
+@@ -44,13 +44,13 @@ static int rfkill_gpio_set_power(void *data, bool blocked)
+ 	struct rfkill_gpio_data *rfkill = data;
+ 
+ 	if (!blocked && !IS_ERR(rfkill->clk) && !rfkill->clk_enabled)
+-		clk_enable(rfkill->clk);
++		clk_prepare_enable(rfkill->clk);
+ 
+ 	gpiod_set_value_cansleep(rfkill->shutdown_gpio, !blocked);
+ 	gpiod_set_value_cansleep(rfkill->reset_gpio, !blocked);
+ 
+ 	if (blocked && !IS_ERR(rfkill->clk) && rfkill->clk_enabled)
+-		clk_disable(rfkill->clk);
++		clk_disable_unprepare(rfkill->clk);
+ 
+ 	rfkill->clk_enabled = !blocked;
+ 
+@@ -95,8 +95,9 @@ static int rfkill_gpio_probe(struct platform_device *pdev)
+ 	if (!rfkill)
+ 		return -ENOMEM;
+ 
+-	device_property_read_string(&pdev->dev, "name", &rfkill->name);
+-	device_property_read_string(&pdev->dev, "type", &type_name);
++	device_property_read_string(&pdev->dev, "rfkill-name", &rfkill->name);
++	device_property_read_string(&pdev->dev, "rfkill-type", &type_name);
++	device_property_read_u32(&pdev->dev, "clock-frequency", &rfkill->clk_frequency);
+ 
+ 	if (!rfkill->name)
+ 		rfkill->name = dev_name(&pdev->dev);
+@@ -110,6 +111,9 @@ static int rfkill_gpio_probe(struct platform_device *pdev)
+ 	}
+ 
+ 	rfkill->clk = devm_clk_get(&pdev->dev, NULL);
++	if (!IS_ERR(rfkill->clk) && rfkill->clk_frequency > 0) {
++		clk_set_rate(rfkill->clk, rfkill->clk_frequency); 
++	}
+ 
+ 	gpio = devm_gpiod_get_optional(&pdev->dev, "reset", GPIOD_OUT_LOW);
+ 	if (IS_ERR(gpio))
+@@ -137,18 +141,13 @@ static int rfkill_gpio_probe(struct platform_device *pdev)
+ 
+ 	ret = rfkill_register(rfkill->rfkill_dev);
+ 	if (ret < 0)
+-		goto err_destroy;
++		return ret;
+ 
+ 	platform_set_drvdata(pdev, rfkill);
+ 
+ 	dev_info(&pdev->dev, "%s device registered.\n", rfkill->name);
+ 
+ 	return 0;
+-
+-err_destroy:
+-	rfkill_destroy(rfkill->rfkill_dev);
+-
+-	return ret;
+ }
+ 
+ static int rfkill_gpio_remove(struct platform_device *pdev)
+@@ -169,6 +168,10 @@ static const struct acpi_device_id rfkill_acpi_match[] = {
+ };
+ MODULE_DEVICE_TABLE(acpi, rfkill_acpi_match);
+ #endif
++static const struct of_device_id rfkill_of_match[] = { 
++	{ .compatible = "rfkill-gpio", }, 
++	{},
++}; 
+ 
+ static struct platform_driver rfkill_gpio_driver = {
+ 	.probe = rfkill_gpio_probe,
+@@ -176,6 +179,7 @@ static struct platform_driver rfkill_gpio_driver = {
+ 	.driver = {
+ 		.name = "rfkill_gpio",
+ 		.acpi_match_table = ACPI_PTR(rfkill_acpi_match),
++		.of_match_table = of_match_ptr(rfkill_of_match), 
+ 	},
+ };
+ 
