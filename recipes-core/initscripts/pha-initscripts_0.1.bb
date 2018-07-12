@@ -23,6 +23,6 @@ do_install () {
 	install -d ${D}${sysconfdir}/rc5.d
 	install -m 0755 ${WORKDIR}/brcm_patchram_plus ${D}${sysconfdir}/init.d	
 	install -m 0755 ${WORKDIR}/enable_batman.sh ${D}${sysconfdir}/init.d	
-	update-rc.d -r ${D} brcm_patchram_plus start 50 5 .
+	#update-rc.d -r ${D} brcm_patchram_plus start 50 5 .
 	update-rc.d -r ${D} enable_batman.sh start 95 5 .	
 }
