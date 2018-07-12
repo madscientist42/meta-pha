@@ -14,6 +14,7 @@ CORE_OS = " \
 	packagegroup-core-boot \
 	packagegroup-base \
 	kernel-modules \
+	pha-initscripts \
 	fuse \
 	pkgconfig \
 	bash \
