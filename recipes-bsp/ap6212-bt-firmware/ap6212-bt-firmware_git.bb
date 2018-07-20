@@ -17,15 +17,15 @@ PV = "0.1-git+${SRCREV}"
 # Just need to copy over files...
 do_install() {
 	install -d  ${D}${nonarch_base_libdir}/firmware/
-	install -d  ${D}${nonarch_base_libdir}/firmware/ap6212
-	cp -r ${S}/proprietary/*.hcd ${D}${nonarch_base_libdir}/firmware/ap6212
+	install -d  ${D}${nonarch_base_libdir}/firmware/brcm
+	cp -r ${S}/proprietary/*.hcd ${D}${nonarch_base_libdir}/firmware/brcm
 }
 
 FILES_${PN} = " \
 	/lib \ 
 	/lib/firmware \
-	/lib/firmware/ap6212 \
-	/lib/firmware/ap6212/bcm43438a0.hcd \
-	/lib/firmware/ap6212/bcm43438a1.hcd \
+	/lib/firmware/brcm \
+	/lib/firmware/brcm/bcm43438a0.hcd \
+	/lib/firmware/brcm/bcm43438a1.hcd \
 	"
 

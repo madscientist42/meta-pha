@@ -1,0 +1,49 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:             brcm_patchram_plus
+# Required-Start:       $remote_fs $syslog
+# Required-Stop:        $remote_fs $syslog
+# Default-Start:        2 3 4 5
+# Default-Stop:
+# Short-Description:    brcm_patchram_plus
+### END INIT INFO
+
+function reset_bt()
+{
+    BTWAKE=/proc/bluetooth/sleep/btwake
+    if [ -f ${BTWAKE} ]; then
+        echo 0 > ${BTWAKE}
+    fi
+    index=`rfkill list | grep $1 | cut -f 1 -d":"` 
+    if [[ -n ${index}} ]]; then
+        rfkill block ${index}
+        sleep 1
+        rfkill unblock ${index}
+        sleep 1
+    fi
+}
+
+case "$1" in
+    start|"")
+	HCIATTACH=/usr/bin/hciattach
+	HCICONFIG=/usr/bin/hciconfig
+	PATCHRAM=/usr/bin/brcm_patchram_plus
+	SERIAL=`cat /proc/device-tree/serial-number | cut -c9-`
+	B1=`echo $SERIAL | cut -c3-4`
+	B2=`echo $SERIAL | cut -c5-6`
+	B3=`echo $SERIAL | cut -c7-8`
+	BDADDR=`printf b8:27:eb:%02x:%02x:%02x $((0x$B1 ^ 0xaa)) $((0x$B2 ^ 0xaa)) $((0x$B3 ^ 0xaa))`
+        if [ -d /sys/class/rfkill/rfkill${index} ]; then
+            reset_bt "sunxi-bt"
+	fi
+	$PATCHRAM -d --no2bytes --patchram /lib/firmware/brcm/BCM43438A1.hcd /dev/ttyS3
+	$HCIATTACH /dev/ttyS3 bcm43xx 115200 flow - $BDADDR
+	$HCICONFIG hci0 up
+	;;
+
+    *)
+        echo "Usage: enable_bt.sh start" >&2
+        exit 3
+        ;;
+esac
