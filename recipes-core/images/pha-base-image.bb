@@ -81,6 +81,9 @@ EXTRA_TOOLS_INSTALL = " \
 	wget \
 	zip \
 	gpsd \
+	gpsd-gpsctl \
+	gpsd-udev\
+	gps-utils \
 	"
 
 IMAGE_INSTALL += " \
