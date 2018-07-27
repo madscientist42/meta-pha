@@ -9,6 +9,8 @@
 # Short-Description:    brcm_patchram_plus
 ### END INIT INFO
 
+export PATH="$PATH:/usr/bin"
+
 function reset_bt()
 {
     BTWAKE=/proc/bluetooth/sleep/btwake
@@ -26,9 +28,9 @@ function reset_bt()
 
 case "$1" in
     start|"")
-	HCIATTACH=/usr/bin/hciattach
-	HCICONFIG=/usr/bin/hciconfig
-	PATCHRAM=/usr/bin/brcm_patchram_plus
+	HCIATTACH=hciattach
+	HCICONFIG=hciconfig
+	PATCHRAM=brcm_patchram_plus
 	SERIAL=`cat /proc/device-tree/serial-number | cut -c9-`
 	B1=`echo $SERIAL | cut -c3-4`
 	B2=`echo $SERIAL | cut -c5-6`
@@ -37,8 +39,8 @@ case "$1" in
         if [ -d /sys/class/rfkill/rfkill${index} ]; then
             reset_bt "sunxi-bt"
 	fi
-	$PATCHRAM -d --no2bytes --patchram /lib/firmware/brcm/BCM43438A1.hcd /dev/ttyS3
-	$HCIATTACH /dev/ttyS3 bcm43xx 115200 flow - $BDADDR
+	$PATCHRAM -d --no2bytes --bd_addr $BDADDR --patchram /lib/firmware/brcm/bcm43438a1.hcd /dev/ttyS3 
+	$HCIATTACH /dev/ttyS3 any 115200 flow 
 	$HCICONFIG hci0 up
 	;;
 
