@@ -1,15 +1,12 @@
 #!/bin/sh
 
-### BEGIN INIT INFO
-# Provides:             brcm_patchram_plus
-# Required-Start:       $remote_fs $syslog
-# Required-Stop:        $remote_fs $syslog
-# Default-Start:        2 3 4 5
-# Default-Stop:
-# Short-Description:    brcm_patchram_plus
-### END INIT INFO
+# Simple thing, really...issue an rfkill for the linux-sunxi BT device and then 
+# turn it back on.  Hardware switch, does a hard reset.  We rely on udev to do
+# the right things for us when this is done in the background so we can get to
+# booted state quicker.
 
 export PATH="$PATH:/usr/bin"
+DEV="sunxi-bt"
 
 function reset_bt()
 {
@@ -26,26 +23,8 @@ function reset_bt()
     fi
 }
 
-case "$1" in
-    start|"")
-	HCIATTACH=hciattach
-	HCICONFIG=hciconfig
-	PATCHRAM=brcm_patchram_plus
-	SERIAL=`cat /proc/device-tree/serial-number | cut -c9-`
-	B1=`echo $SERIAL | cut -c3-4`
-	B2=`echo $SERIAL | cut -c5-6`
-	B3=`echo $SERIAL | cut -c7-8`
-	BDADDR=`printf b8:27:eb:%02x:%02x:%02x $((0x$B1 ^ 0xaa)) $((0x$B2 ^ 0xaa)) $((0x$B3 ^ 0xaa))`
-        if [ -d /sys/class/rfkill/rfkill${index} ]; then
-            reset_bt "sunxi-bt"
-	fi
-	$PATCHRAM -d --no2bytes --bd_addr $BDADDR --patchram /lib/firmware/brcm/bcm43438a1.hcd /dev/ttyS3 
-	$HCIATTACH /dev/ttyS3 any 115200 flow 
-	$HCICONFIG hci0 up
-	;;
+rfkill list | grep -q $DEV
+if [ $? -eq 0 ]; then
+    reset_bt "$DEV"
+fi
 
-    *)
-        echo "Usage: enable_bt.sh start" >&2
-        exit 3
-        ;;
-esac

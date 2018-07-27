@@ -1,0 +1,1 @@
+SUBSYSTEM=="rfkill", ATTR{type}=="bluetooth", RUN+="/etc/init.d/udev_bt.sh"
