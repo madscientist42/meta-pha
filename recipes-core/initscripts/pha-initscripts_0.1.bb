@@ -9,9 +9,6 @@ PR = "r1"
 
 SRC_URI = " \
 	file://enable_bt.sh \
-	file://start_bt.sh \
-	file://udev_bt.sh \
-	file://90-rfkill.rules \
 	file://enable_batman.sh \
 	file://LICENSE \
 	"
@@ -27,10 +24,7 @@ do_install () {
 	install -d ${D}${sysconfdir}/udev
 	install -d ${D}${sysconfdir}/udev/rules.d
 	install -m 0755 ${WORKDIR}/enable_bt.sh ${D}${sysconfdir}/init.d	
-	install -m 0755 ${WORKDIR}/start_bt.sh ${D}${sysconfdir}/init.d	
-	install -m 0755 ${WORKDIR}/udev_bt.sh ${D}${sysconfdir}/init.d	
 	install -m 0755 ${WORKDIR}/enable_batman.sh ${D}${sysconfdir}/init.d
-	install -m 0644 ${WORKDIR}/90-rfkill.rules ${D}${sysconfdir}/udev/rules.d
 	update-rc.d -r ${D} enable_bt.sh start 50 5 .
 	update-rc.d -r ${D} enable_batman.sh start 95 5 .	
 }
