@@ -14,6 +14,7 @@ IMAGE_INSTALL += " \
 	packagegroup-sdk-target \
 	kernel-devsrc \
 	glibc-dev \
+	sudo \
 	go \
 	packagegroup-go-sdk-target \
 	go-helloworld \
