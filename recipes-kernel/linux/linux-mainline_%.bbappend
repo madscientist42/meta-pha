@@ -1,5 +1,5 @@
 # Look in the local appended project directory here...
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 # We depend on having all of openssl in the native leg for this...
 DEPENDS += "openssl-native"
@@ -9,7 +9,7 @@ SRC_URI += " \
 	file://00000-build-with-openssl-native.patch \
 	file://00001-neo-plus2-devicetree-fixes.patch \
 	file://00002-rfkill-gpio.patch \
-    "    
+    	"    
 
 # Some of the extra build hints...
 KERNEL_EXTRA_ARGS += " \
