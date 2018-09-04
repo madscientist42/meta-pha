@@ -26,6 +26,7 @@ CORE_OS = " \
 	rtl8814au-aircrack-ng \
 	rtl8822bu \
 	bluez5 \
+	bluez5-noinst-tools \
 	batctl \
 	boost \
 	rpe-tools \
