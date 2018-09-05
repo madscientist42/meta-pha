@@ -22,5 +22,5 @@ do_compile() {
 do_install() {
     # Just copy the single app python file since it's all we need...
     install -d ${D}${bindir}
-    install -m 0755 ${S}/ibeacon ${D}${bindir}
+    install -m 0755 ${S}/ibeacon ${D}${bindir}/ibeacon.py
 }
