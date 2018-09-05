@@ -9,8 +9,7 @@ RUBY_TARGET := "${TARGET_ARCH}-${TARGET_OS}"
 # Hack in this for now- there's something NOT quite right in the spec there that's "broken" for 
 # at least these targets.  It's still a bit of a WIP for the cross-compile support that's not
 # even close to finished, but we need it for graceful processing of things down the line.
-RUBY_TARGET_append_nanopi-neo2 := "-gnu"
-RUBY_TARGET_append_nanopi-neo-plus2 := "-gnu"
+RUBY_TARGET_append_aarch64 := "-gnu"
 
 
 # This snippet sets aside support for target native and "cross-compilation" - The whole thing is a hot-mess because
