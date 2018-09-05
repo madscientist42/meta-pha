@@ -4,7 +4,13 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 # get things to a nearly working state for the build so that things aren't horribly broken on the target
 # system to attempt bundler operations as desired.  It should also set the stage for cross-compiling gems
 # PROPERLY within the current ruby.bbclass in our layer.
-RUBY_TARGET := "${TARGET_ARCH}-${TARGET_OS}-gnu"
+RUBY_TARGET := "${TARGET_ARCH}-${TARGET_OS}"
+
+# Hack in this for now- there's something NOT quite right in the spec there that's "broken" for 
+# at least these targets.  It's still a bit of a WIP for the cross-compile support that's not
+# even close to finished, but we need it for graceful processing of things down the line.
+RUBY_TARGET_append_nanopi-neo2 := "-gnu"
+RUBY_TARGET_append_nanopi-neo-plus2 := "-gnu"
 
 
 # This snippet sets aside support for target native and "cross-compilation" - The whole thing is a hot-mess because
