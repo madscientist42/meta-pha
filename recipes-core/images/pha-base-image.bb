@@ -14,6 +14,7 @@ CORE_OS = " \
 	packagegroup-core-boot \
 	packagegroup-base \
 	kernel-modules \
+	kernel-devicetree \
 	pha-initscripts \
 	fuse \
 	pkgconfig \
