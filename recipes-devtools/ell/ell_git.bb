@@ -1,7 +1,7 @@
 DESCRIPTION = "Intel Embedded Linux Library"
 HOMEPAGE = "https://01.org/ell"
 SECTION = "devel/libs"
-LICENSE = "LGPL"
+LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 DEPENDS = "virtual/kernel"

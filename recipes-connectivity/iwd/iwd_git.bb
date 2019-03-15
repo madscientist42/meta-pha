@@ -1,7 +1,7 @@
 DESCRIPTION = "Intel Inet Wireless Daemon"
 HOMEPAGE = "https://git.kernel.org/pub/scm/network/wireless/iwd.git/about/"
 SECTION = "networking"
-LICENSE = "LGPL"
+LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 DEPENDS = " \
