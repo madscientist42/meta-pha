@@ -2,7 +2,6 @@
 
 IMAGE_FEATURES += "package-management splash ssh-server-openssh"
 IMAGE_LINGUAS = "en-us"
-MACHINE_FEATURES += "usbhost wifi"
 
 inherit core-image
 
@@ -47,13 +46,12 @@ NET_SUPPORT = " \
 	openssh-misc \
 	openssh-keygen \
 	tcpdump \
+    connman \
 	"
 
 # Core WiFi tools and features...
 WIFI_SUPPORT = " \
 	iw \
-	wireless-tools \
-	wpa-supplicant \
 	hostapd \
 	"
 
