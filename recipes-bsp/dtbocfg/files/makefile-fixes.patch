@@ -1,0 +1,46 @@
+From 5d757d0e1271c6ea50aa10814a6d5477203a0db6 Mon Sep 17 00:00:00 2001
+From: Frank Earl <fearl@watchguardvideo.com>
+Date: Thu, 21 Mar 2019 14:33:49 -0500
+Subject: Clear out "helper" stuff from upstream...
+
+It is in the way and doesn't work for most cases...
+
+diff --git a/Makefile b/Makefile
+index 3c34524..be375a0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,18 +1,3 @@
+-HOST_ARCH       ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
+-ARCH            ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
+-KERNEL_SRC_DIR  ?= /lib/modules/$(shell uname -r)/build
+-
+-ifeq ($(ARCH), arm)
+- ifneq ($(HOST_ARCH), arm)
+-   CROSS_COMPILE  ?= arm-linux-gnueabihf-
+- endif
+-endif
+-ifeq ($(ARCH), arm64)
+- ifneq ($(HOST_ARCH), arm64)
+-   CROSS_COMPILE  ?= aarch64-linux-gnu-
+- endif
+-endif
+-
+ obj-m := dtbocfg.o
+ 
+ all:
+
+diff --git a/Makefile b/Makefile
+index be375a0..3e1f771 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,8 +1,8 @@
+ obj-m := dtbocfg.o
+ 
+ all:
+-	make -C $(KERNEL_SRC_DIR) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) M=$(PWD) modules
++	make -C $(KERNEL_SRC) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) M=$(PWD) modules
+ 
+ clean:
+-	make -C $(KERNEL_SRC_DIR) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) M=$(PWD) clean
++	make -C $(KERNEL_SRC) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) M=$(PWD) clean
+ 
