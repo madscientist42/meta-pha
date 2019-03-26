@@ -20,6 +20,7 @@ S = "${WORKDIR}/git"
 
 SRC_URI = "\
     git://git.kernel.org/pub/scm/network/wireless/iwd.git;protocol=https \
+    file://00001-avoid-nulls-being-strduped.patch \
     "
 
 SRCREV = "154e9f63bc5664a55e8cb79ad425cc36673ab47b"
