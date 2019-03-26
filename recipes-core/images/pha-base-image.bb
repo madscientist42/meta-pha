@@ -47,6 +47,8 @@ NET_SUPPORT = " \
 	openssh-keygen \
 	tcpdump \
     connman \
+    connman-tools \
+    connman-client \
 	"
 
 # Core WiFi tools and features...
@@ -57,6 +59,7 @@ WIFI_SUPPORT = " \
 
 TEST_SUPPORT = " \
 	iperf3 \
+    gdbserver \
 	"
 
 # Everything else that needs to be in the baseline image that isn't one of the above or
