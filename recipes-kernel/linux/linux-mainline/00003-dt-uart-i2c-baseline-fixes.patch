@@ -1,0 +1,52 @@
+From 7eea7cf746cf2a698ffdb3585d8d12e1c95b803c Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Tue, 26 Mar 2019 07:36:40 -0500
+Subject: Additional tuning fixes to DTS...
+
+We want the other UARTS to be controllable by DTBO insertion
+since we are adding the support for the same and will be
+adding dtbos for each one shortly for inclusion on target
+configurations.  Also need to have i2C lit all the time.
+
+In the case of the UARTs, they're not dedicated functions
+on the expansion pinmap on the Plus2, they can also be
+GPIOs and we don't want cores yanked about.  Make them
+GPIOs unless someone WANTS to use the UARTs.
+
+In the case of I2C, i2c0 is a dedicated function on the
+pinmap and should've NEVER been not on for the Plus2.
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+index f8b3f29..7e05e58 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
+@@ -356,19 +356,16 @@
+ &uart1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart1_pins>, <&uart1_rts_cts_pins>;
+-	status = "okay";
+ };
+ 
+ &uart2 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart2_pins>, <&uart2_rts_cts_pins>;
+-	status = "okay";
+ };
+ 
+ &uart3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart3_pins>, <&uart3_rts_cts_pins>;
+-	status = "okay";
+ };
+ 
+ &pio {
+@@ -408,4 +405,9 @@
+ 	status = "okay";
+ };
+ 
++&i2c0 {
++    /* I2C is a dedicated pinset/function on the Plus2, so turn it ON */
++    status = "okay";
++};
++
+ 
