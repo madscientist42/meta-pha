@@ -3,6 +3,5 @@
 # for the purposes of our distro...at least until it proves out
 # and can be PR-ed into mainline at Sumo or later.
 RDEPENDS_packagegroup-base-wifi = " \
-    ${VIRTUAL-RUNTIME_wireless-tools} \    
     ${@bb.utils.contains('DISTRO_FEATURES', 'iwd', 'iwd', 'wpa-supplicant',d)} \
     "
