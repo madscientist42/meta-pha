@@ -87,7 +87,6 @@ EXTRA_TOOLS_INSTALL = " \
     gpsd-gpsctl \
     gpsd-udev\
     gps-utils \
-    flite \
     "
 
 IMAGE_INSTALL += " \
