@@ -18,12 +18,12 @@ inherit go pkgconfig
 
 GO_INSTALL = "${S}/src/${GO_IMPORT}"
 
-strip_test_code() {
-    rm -rf ${D}/usr/lib/go/src/github.com/rfjakob/gocryptfs/tests
-    find ${D}/usr/lib/go -name test* -exec rm -f {} \; 
+# FIXME -- We're going to wedge in a post-patch hack here to strip test
+#          functions out of this.  We need to sort out testing as a 
+#          packaging on Golang stuff...
+remove_unit_tests() {
+    find ${S} -name *test* -exec rm -f {} \;
 }
-do_install[postfuncs] += " strip_test_code "
+do_patch[postfuncs] += " remove_unit_tests "
 
 RDEPENDS_${PN}-dev = "bash"
-
-

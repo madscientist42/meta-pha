@@ -3,6 +3,8 @@ HOMEPAGE = "https://github.com/jacobsa/crypto"
 LICENSE = "Apache2.0"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=430d04ce687760975ee4d1833cfd5d4f"
 
+DEPENDS = " go-oglematchers"
+
 GO_IMPORT = "github.com/jacobsa/crypto"
 
 SRC_URI = " \
