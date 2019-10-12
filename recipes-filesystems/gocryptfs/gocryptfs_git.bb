@@ -22,7 +22,8 @@ GO_INSTALL = "${S}/src/${GO_IMPORT}"
 #          functions out of this.  We need to sort out testing as a 
 #          packaging on Golang stuff...
 remove_unit_tests() {
-    find ${S} -name *test* -exec rm -f {} \;
+    rm -rf ${S}/src/${GO_IMPORT}/test
+    find ${S} -name test* -exec rm -f {} \;
 }
 do_patch[postfuncs] += " remove_unit_tests "
 
