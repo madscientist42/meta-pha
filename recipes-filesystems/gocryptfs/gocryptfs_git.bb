@@ -23,6 +23,7 @@ GO_INSTALL = "${S}/src/${GO_IMPORT}"
 #          packaging on Golang stuff...
 remove_unit_tests() {
     rm -rf ${S}/src/${GO_IMPORT}/test
+    rm -rf ${S}/src/${GO_IMPORT}/tests
     find ${S} -name test* -exec rm -f {} \;
 }
 do_patch[postfuncs] += " remove_unit_tests "
