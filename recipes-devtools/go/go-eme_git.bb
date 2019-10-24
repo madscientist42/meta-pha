@@ -1,7 +1,7 @@
 DESCRIPTION = "Encrypt-Mix-Encrypt wide-block encryption for Golang"
 HOMEPAGE = "https://github.com/rfjakob/eme"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=6fee026f0b48abb4d7cd72e25032503c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6fee026f0b48abb4d7cd72e25032503c"
 
 GO_IMPORT = "github.com/rfjakob/eme"
 
@@ -11,10 +11,13 @@ SRC_URI = " \
 
 SRCREV = "2222dbd4ba467ab3fc7e8af41562fcfe69c0d770"
 
-inherit go
+S = "${WORKDIR}/git"
 
-GO_INSTALL = "${S}/src/${GO_IMPORT}"
+# This is packaging only since this is a library...
+do_install() {
+    install -d ${D}${libdir}/go/src/${GO_IMPORT}
+    cp -Rp --no-preserve=ownership ${S}/* ${D}${libdir}/go/src/${GO_IMPORT}
+}
 
-# The testing, etc. stuff requires bash to be in the mix...
-RDEPENDS_${PN}-dev += "bash"
+FILES_${PN} = "${libdir}/go/src"
 
