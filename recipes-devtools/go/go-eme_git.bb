@@ -26,6 +26,7 @@ remove_unit_tests() {
     rm -rf ${S}/src/${GO_IMPORT}/test
     rm -rf ${S}/src/${GO_IMPORT}/tests
     find ${S} -name test* -exec rm -f {} \;
+    find ${S} -name benchmark* -exec rm -f {} \;
 }
 do_patch[postfuncs] += " remove_unit_tests "
 
