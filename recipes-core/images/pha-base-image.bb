@@ -1,6 +1,6 @@
 # A baseline console image with a few features specified...
 
-IMAGE_FEATURES += "package-management splash ssh-server-openssh"
+IMAGE_FEATURES += "package-management splash ssh-server-openssh empty-root-password allow-empty-password"
 IMAGE_LINGUAS = "en-us"
 
 inherit core-image
@@ -21,9 +21,7 @@ CORE_OS = " \
     udev-rules-rpi \
     linux-firmware-ralink \
     linux-firmware-bcm43430 \
-    rtl8812au-aircrack-ng \
-    rtl8814au-aircrack-ng \
-    rtl8822bu \
+    rtl88x2bu \
     bluez5 \
     bluez5-noinst-tools \
     batctl \
@@ -49,17 +47,18 @@ NET_SUPPORT = " \
     connman \
     connman-tools \
     connman-client \
+    neard \
+    ofono \
     "
 
 # Core WiFi tools and features...
 WIFI_SUPPORT = " \
     iw \
-    hostapd \
     "
 
 TEST_SUPPORT = " \
     iperf3 \
-    gdbserver \
+    gdb \
     "
 
 # Everything else that needs to be in the baseline image that isn't one of the above or
@@ -87,6 +86,7 @@ EXTRA_TOOLS_INSTALL = " \
     gpsd-gpsctl \
     gpsd-udev\
     gps-utils \
+    gocryptfs \
     "
 
 IMAGE_INSTALL += " \
