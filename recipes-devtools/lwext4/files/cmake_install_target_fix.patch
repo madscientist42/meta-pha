@@ -1,0 +1,20 @@
+From 29fa74263e7cb2050f17dd9955ba85738a7ab0c3 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Mon, 30 Dec 2019 23:36:13 -0600
+Subject: Remove the specific refs that prevent specifying prefixes
+
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 3b82fcf..026fee0 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -17,6 +17,6 @@ else()
+ endif()
+ 
+ if  (DEFINED INSTALL_LIB)
+-INSTALL(TARGETS lwext4 DESTINATION /usr/local/lib)
+-INSTALL(DIRECTORY ${PROJECT_BINARY_DIR}/include/. DESTINATION /usr/local/include/lwext4)
++INSTALL(TARGETS lwext4 DESTINATION ${CMAKE_INSTALL_LIBDIR})
++INSTALL(DIRECTORY ${PROJECT_SOURCE_DIR}/include/. ${PROJECT_BINARY_DIR}/include/. DESTINATION ${CMAKE_INSTALL_PREFIX}/include/lwext4 FILES_MATCHING PATTERN "*.h")
+ endif()
+\ No newline at end of file
