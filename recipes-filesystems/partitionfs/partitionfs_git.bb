@@ -13,7 +13,7 @@ SRC_URI = "\
 	git://github.com/madscientist42/partitionfs.git;protocol=https \
     "
 
-SRCREV = "38f7bd1ea090e75da7d98a68bc060016646cd589"
+SRCREV = "b366ebfbf0a6cfdf469b82c62da5b8befa87de26"
 
 inherit cmake
 
