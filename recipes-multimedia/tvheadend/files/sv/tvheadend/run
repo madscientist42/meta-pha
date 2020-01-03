@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/tvheadend 2>&1 
