@@ -30,9 +30,10 @@ CORE_OS = " \
     brcm-patchram-plus \
     ap6212-bt-firmware \
     dtbocfg \
+    pha-svcs \
     "
 
-# Higher-level network stuff, but not things like webservers (Those are 
+# Higher-level network stuff, but not things like webservers (Those are
 # apps and external tools...)
 NET_SUPPORT = " \
     ethtool \
@@ -47,13 +48,13 @@ NET_SUPPORT = " \
     connman \
     connman-tools \
     connman-client \
-    neard \
-    ofono \
+    bridge-utils \
     "
 
 # Core WiFi tools and features...
 WIFI_SUPPORT = " \
     iw \
+    iwd \
     "
 
 TEST_SUPPORT = " \
@@ -96,11 +97,15 @@ IMAGE_INSTALL += " \
     ${NET_SUPPORT} \
     ${WIFI_SUPPORT} \
     "
-	
-# Make our cross-compile chain include these things, just in case...	
+
+# Make our cross-compile chain include these things, just in case...
 TOOLCHAIN_HOST_TASK += " \
     nativesdk-boost \
     "
-	    
 
+inherit extrausers
+EXTRA_USERS_PARAMS = " \
+    useradd log; \
+    usermod -p $(openssl passwd toor) root; \
+    "
 

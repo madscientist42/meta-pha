@@ -23,7 +23,7 @@ SRC_URI = "\
     file://00001-avoid-nulls-being-strduped.patch \
     "
 
-SRCREV = "154e9f63bc5664a55e8cb79ad425cc36673ab47b"
+SRCREV = "a01754f56aacdc641c819f983c3c0ad374be77b2"
 
 # Builds with autotools
 inherit autotools-brokensep pkgconfig
@@ -33,10 +33,10 @@ do_configure_prepend() {
     ${S}/bootstrap
 }
 
-# FIXME -- This is for MY purposes.  Need to turn on/off the systemd stuff per 
-#          distro rules.  (While I am a runit dev, I'm not going to cut them 
+# FIXME -- This is for MY purposes.  Need to turn on/off the systemd stuff per
+#          distro rules.  (While I am a runit dev, I'm not going to cut them
 #          off...)
-EXTRA_OECONF = "--disable-systemd-service --enable-external-ell"
+EXTRA_OECONF = "--disable-systemd-service --enable-external-ell --disable-manual-pages"
 
 FILES_${PN} += " \
     /usr/share/dbus-1/system.d/iwd-dbus.conf \

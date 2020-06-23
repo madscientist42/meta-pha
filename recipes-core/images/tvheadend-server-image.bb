@@ -1,7 +1,7 @@
 IMAGE_FEATURES += "package-management splash ssh-server-openssh empty-root-password allow-empty-password"
 IMAGE_LINGUAS = "en-us"
 
-inherit core-image
+inherit core-image extrausers
 
 # Handle RPi2 boot support...
 DEPENDS_raspberrypi2 += "bcm2835-bootfiles"
@@ -22,6 +22,8 @@ CORE_OS = " \
     bluez5-noinst-tools \
     brcm-patchram-plus \
     dtbocfg \
+    avahi-daemon \
+    avahi-utils \
     "
 
 # Higher-level network stuff, but not things like webservers (Those are 
@@ -59,7 +61,6 @@ EXTRA_TOOLS_INSTALL = " \
     sysfsutils \
     unzip \
     util-linux \
-    vim-tiny \
     wget \
     zip \
     "
@@ -69,5 +70,12 @@ IMAGE_INSTALL += " \
     ${EXTRA_TOOLS_INSTALL} \
     ${NET_SUPPORT} \
     ${WIFI_SUPPORT} \
+    dvb-apps \
+    ffmpeg \
     tvheadend \
+    "
+
+EXTRA_USERS_PARAMS += " \
+    useradd -U log; \
+    useradd -U tvheadend; \
     "

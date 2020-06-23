@@ -1,7 +1,7 @@
-From 1ada31065a54d78d07bb8102cd51b1374526844c Mon Sep 17 00:00:00 2001
+From f1294e02e10e296f2e86946915d81419d5f6656d Mon Sep 17 00:00:00 2001
 From: Frank Earl <frank@earlconsult.com>
 Date: Tue, 19 Mar 2019 08:06:55 -0500
-Subject: Don't fail to have a value in the structure for the phy...
+Subject: [PATCH] Don't fail to have a value in the structure for the phy...
 
 The process may leave nulls in the structure for a given wiphy.
 Not all devices may reside in the HWDB on a target but have
@@ -10,13 +10,17 @@ can't find vendor or model info rather than lazily keeping
 it EMPTY, which will cause follow-on controllers like connman
 to CHOKE.
 
+---
+ src/wiphy.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
 diff --git a/src/wiphy.c b/src/wiphy.c
-index 6c1cf38..19aa498 100644
+index aef39549..b9032659 100644
 --- a/src/wiphy.c
 +++ b/src/wiphy.c
-@@ -711,6 +711,13 @@ static void wiphy_register(struct wiphy *wiphy)
- 		l_hwdb_lookup_free(entries);
- 	}
+@@ -1045,6 +1045,13 @@ static void wiphy_register(struct wiphy *wiphy)
+ 
+ 	wiphy_get_driver_name(wiphy);
  
 +    /* Ensure you have the above parameters filled with **SOMETHING** 
 +       instead of passing a NULL back to other callers... */

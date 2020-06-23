@@ -1,2 +1,4 @@
 #!/bin/sh
-exec /usr/bin/tvheadend 2>&1 
+
+# NOTE: This presumes that you're adding the following user/group...
+exec /usr/bin/tvheadend -C -d -u tvheadend -g tvheadend 2>&1
