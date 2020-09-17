@@ -1,21 +1,24 @@
-From 04e91fc17d0d57c55fc4a23b8fba87b95c1837b4 Mon Sep 17 00:00:00 2001
-From: Frank Earl <fearl@srtrl.com>
-Date: Wed, 2 May 2018 12:59:03 -0400
-Subject: Mod for building out-of-kernel build for the driver...
+From 98244edad3bee1480fb79b6ae51648f27454e00a Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Thu, 17 Sep 2020 00:38:30 -0500
+Subject: Turn on out-of-tree compile support...
 
 
 diff --git a/Makefile b/Makefile
-index 80a9a14..d5f4b40 100644
+index 7a0de9a..4d4ecf2 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1,7 +1,7 @@
- # Standalone Makefile - uncomment for out-of-tree compilation
--#CONFIG_WLAN_VENDOR_XRADIO := m
--#CONFIG_XRADIO_USE_EXTENSIONS := y
--#CONFIG_XRADIO_WAPI_SUPPORT := n
+@@ -5,6 +5,13 @@
+ # ccflags-y += -DCONFIG_XRADIO_USE_EXTENSIONS
+ # ccflags-y += -DCONFIG_XRADIO_WAPI_SUPPORT
+
++# Dial in what the build script does (which is slightly different
++# than above...)
 +CONFIG_WLAN_VENDOR_XRADIO := m
 +CONFIG_XRADIO_USE_EXTENSIONS := y
 +CONFIG_XRADIO_WAPI_SUPPORT := n
- 
++
++
  # Kernel part
- 
+
+ obj-$(CONFIG_WLAN_VENDOR_XRADIO) += xradio_wlan.o
