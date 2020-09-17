@@ -1,13 +1,11 @@
 SUMMARY = "PHA specific runit services scripting"
 SECTION = "base"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0835ade698e0bcf8506ecda2f7b4f302"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=69bc7ae45dda8f7d0e5eef62685147b2"
 
 DEPENDS = "runit"
 
 PR = "r2"
-
-# Make this machine specific...
 
 SRC_URI = " \
 	file://core-services/01-batman-kmod.sh \
