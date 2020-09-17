@@ -2,7 +2,7 @@ PHA Technologies' OE metadata layer and distribution base for their projects (an
 
 Supports the "Sumo" (2.5), "Thud" (2.6), "Warrior" (2.7), and Zeus (3.0) releases of Yocto/OE as a core for build at this time.  
 
-We support four of the latest Yocto versions at any one given time.
+We support four of the latest Yocto versions at any one given time.  Dunfell (3.1) support is expected shortly.  Sumo official support will fall off at that time- mainly because there's a drift in metadata that precludes having more than abouut the last 4 or so as support.
 
 Has the unique distinction, when combined with meta-sunxi, of being the current one-stop shop for OE on the FrendlyElec NanoPI Neo2 and Neo-Plus2 boards, supporting all USB's, the WiFi/Bluetooth on the Neo-Plus2, etc.  These boards are currently otherwise unsupported in OE and only really supported otherwise by FriendlyElec with their modified Ubuntu Core, which may not suit your needs.
 
