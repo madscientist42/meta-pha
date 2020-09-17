@@ -5,7 +5,6 @@ LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 DEPENDS = " \
-    virtual/kernel \
     ell \
     readline \
     dbus \
@@ -23,7 +22,7 @@ SRC_URI = "\
     file://00001-avoid-nulls-being-strduped.patch \
     "
 
-SRCREV = "a01754f56aacdc641c819f983c3c0ad374be77b2"
+SRCREV = "2f51b51152e1096d93d9acba05076a5f682d63cd"
 
 # Builds with autotools
 inherit autotools-brokensep pkgconfig

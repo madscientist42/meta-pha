@@ -13,7 +13,7 @@ SRC_URI = "\
     git://git.kernel.org/pub/scm/libs/ell/ell.git;protocol=https \
     "
 
-SRCREV = "01794be4052276ad81fd5d8c02c7bd3f0ffe3050"
+SRCREV = "c156b921accae7d556f5d4166d02c0204cd50f56"
 
 # Builds with autotools
 inherit autotools-brokensep pkgconfig

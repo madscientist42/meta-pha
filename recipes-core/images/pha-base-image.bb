@@ -83,10 +83,6 @@ EXTRA_TOOLS_INSTALL = " \
     vim-tiny \
     wget \
     zip \
-    gpsd \
-    gpsd-gpsctl \
-    gpsd-udev\
-    gps-utils \
     gocryptfs \
     "
 

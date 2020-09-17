@@ -5,7 +5,7 @@ SRC_URI  = " \
     file://connman \
     "
 
-SRCREV = "603def293a8587f2982630e3a8431a668c77e0a4"
+SRCREV = "1ee420ace2b8edb0d4025f469aaa3d00d220dc98"
 
 SRC_URI_append_libc-musl = " file://0002-resolve-musl-does-not-implement-res_ninit.patch"
 
