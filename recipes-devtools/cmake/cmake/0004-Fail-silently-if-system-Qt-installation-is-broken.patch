@@ -1,4 +1,4 @@
-From d4a78e8739e845c2963666f7ef6a6c7a89827988 Mon Sep 17 00:00:00 2001
+From a6d478a017186e68f4113096c348da53eb9a210e Mon Sep 17 00:00:00 2001
 From: Otavio Salvador <otavio@ossystems.com.br>
 Date: Thu, 5 Jul 2018 10:26:48 -0300
 Subject: [PATCH] Fail silently if system Qt installation is broken
@@ -28,7 +28,7 @@ Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
  1 file changed, 20 insertions(+), 19 deletions(-)
 
 diff --git a/Modules/FindQt4.cmake b/Modules/FindQt4.cmake
-index 7e18243..497d5c3 100644
+index 204b2a6..b10047a 100644
 --- a/Modules/FindQt4.cmake
 +++ b/Modules/FindQt4.cmake
 @@ -988,25 +988,26 @@ if (QT_QMAKE_EXECUTABLE AND
