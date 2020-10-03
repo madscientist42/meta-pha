@@ -1,6 +1,6 @@
 # Handle version specific stuff here...
 LIC_FILES_CHKSUM = " \
-    file://Copyright.txt;md5=622747147b46f22e1953876a7cba3323 \
+    file://Copyright.txt;md5=c721f56fce89ba2eadc2fdd8ba1f4d83 \
     file://Source/cmake.h;md5=4494dee184212fc89c469c3acd555a14;beginline=1;endline=3 \
     "
 
