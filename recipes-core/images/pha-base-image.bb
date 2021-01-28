@@ -37,7 +37,7 @@ CORE_OS = " \
 # apps and external tools...)
 NET_SUPPORT = " \
     ethtool \
-    dhcp-client \
+    dhcpcd \
     openssh-ssh \
     openssh-scp \
     openssh-sftp \
@@ -49,6 +49,7 @@ NET_SUPPORT = " \
     connman-tools \
     connman-client \
     bridge-utils \
+    f2fs-tools \
     "
 
 # Core WiFi tools and features...
@@ -59,6 +60,9 @@ WIFI_SUPPORT = " \
 
 TEST_SUPPORT = " \
     iperf3 \
+    bonnie++ \
+    iozone3 \
+    glmark2 \
     gdb \
     "
 
@@ -83,7 +87,6 @@ EXTRA_TOOLS_INSTALL = " \
     vim-tiny \
     wget \
     zip \
-    gocryptfs \
     "
 
 IMAGE_INSTALL += " \

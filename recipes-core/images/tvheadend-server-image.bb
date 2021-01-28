@@ -15,6 +15,7 @@ CORE_OS = " \
     fuse \
     pkgconfig \
     eudev \
+    udev-extraconf \
     udev-rules-rpi \
     linux-firmware-ralink \
     linux-firmware-bcm43430 \
@@ -26,7 +27,7 @@ CORE_OS = " \
     avahi-utils \
     "
 
-# Higher-level network stuff, but not things like webservers (Those are 
+# Higher-level network stuff, but not things like webservers (Those are
 # apps and external tools...)
 NET_SUPPORT = " \
     dhcp-client \
