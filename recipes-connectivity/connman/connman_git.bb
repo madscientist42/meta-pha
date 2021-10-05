@@ -7,9 +7,9 @@ SRC_URI  = " \
 
 SRCREV = "1ee420ace2b8edb0d4025f469aaa3d00d220dc98"
 
-SRC_URI_append_libc-musl = " file://0002-resolve-musl-does-not-implement-res_ninit.patch"
+SRC_URI:append:libc-musl = " file://0002-resolve-musl-does-not-implement-res_ninit.patch"
 
-RRECOMMENDS_${PN} = "connman-conf"
-RCONFLICTS_${PN} = "networkmanager"
+RRECOMMENDS:${PN} = "connman-conf"
+RCONFLICTS:${PN} = "networkmanager"
 
 S = "${WORKDIR}/git"

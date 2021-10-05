@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/madscientist42/CurvedSalsa.git;protocol=https;branch
 SRCREV = "88ae61e009a6f9229f0412d0a8e6641b4197d60c"
 
 DEPENDS = "boost"
-RDEPENDS_${PN} = "boost"
+RDEPENDS:${PN} = "boost"
 
 PV = "1.0+git${SRCPV}"
 

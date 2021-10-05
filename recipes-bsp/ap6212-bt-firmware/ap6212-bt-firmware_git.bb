@@ -21,8 +21,8 @@ do_install() {
 	cp -r ${S}/proprietary/*.hcd ${D}${nonarch_base_libdir}/firmware/brcm
 }
 
-FILES_${PN} = " \
-	/lib \ 
+FILES:${PN} = " \
+	/lib \
 	/lib/firmware \
 	/lib/firmware/brcm \
 	/lib/firmware/brcm/bcm43438a0.hcd \

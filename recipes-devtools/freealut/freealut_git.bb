@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7ec51bd663119a90c3d50704d6051fae"
 S = "${WORKDIR}/git"
 
 DEPENDS = "openal-soft"
-RDEPENDS_encfs = "openal-soft"
+RDEPENDS:encfs = "openal-soft"
 
 SRC_URI = "\
 	  git://github.com/vancegroup/freealut.git;protocol=https \

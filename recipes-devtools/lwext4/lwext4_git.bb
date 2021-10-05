@@ -21,6 +21,6 @@ BBCLASSEXTEND = "native nativesdk"
 
 PACKAGES += "${PN}-utils"
 
-FILES_${PN} = "/usr/lib"
-FILES_${PN}-dev = "/usr/include"
-FILES_${PN}-utils = "/usr/bin"
+FILES:${PN} = "/usr/lib"
+FILES:${PN}-dev = "/usr/include"
+FILES:${PN}-utils = "/usr/bin"

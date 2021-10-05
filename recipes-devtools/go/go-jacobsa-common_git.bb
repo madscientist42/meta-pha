@@ -22,7 +22,7 @@ do_install() {
 }
 
 # FIXME -- We're going to wedge in a post-patch hack here to strip test
-#          functions out of this.  We need to sort out testing as a 
+#          functions out of this.  We need to sort out testing as a
 #          packaging on Golang stuff...
 remove_unit_tests() {
     rm -rf ${S}/src/${GO_IMPORT}/test
@@ -31,4 +31,4 @@ remove_unit_tests() {
 }
 do_patch[postfuncs] += " remove_unit_tests "
 
-FILES_${PN} = "${libdir}/go/src"
+FILES:${PN} = "${libdir}/go/src"

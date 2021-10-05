@@ -3,7 +3,7 @@
 # recipe specific sysroot support.  You never know with this stuff
 # Since people are lagging a bit on OE and we're working on latest (But
 # not bleeding edge...)
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 # "Fix" things for Python 3.X support...this will periodically break but until
 # we can un-pooch this build process so it can use stock U-Boot's build and

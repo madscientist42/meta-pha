@@ -10,7 +10,7 @@ DEPENDS = " \
     dbus \
     "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     ell \
     readline \
     "
@@ -37,7 +37,7 @@ do_configure_prepend() {
 #          off...)
 EXTRA_OECONF = "--disable-systemd-service --enable-external-ell --disable-manual-pages"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /usr/share/dbus-1/system.d/iwd-dbus.conf \
     "
 

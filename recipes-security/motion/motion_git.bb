@@ -10,7 +10,7 @@ DEPENDS = " \
 	update-rc.d-native \
 	"
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	jpeg \
 	libmicrohttpd \
 	libwebp \

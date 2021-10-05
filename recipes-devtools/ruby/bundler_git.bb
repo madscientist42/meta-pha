@@ -26,7 +26,7 @@ SRC_URI = " \
 
 inherit ruby
 
-RDEPENDS_${PN} = "git"
+RDEPENDS:${PN} = "git"
 
 BBCLASSEXTEND = "native"
 

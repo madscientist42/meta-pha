@@ -1,0 +1,29 @@
+# Handle the Phase 1 case for Exquisite/Bootsplash.  This provides the
+# framework for Phase 1 of runit only.  We'll handle Phase 2 elsewhere.
+
+# Launch Exquisite proper- this allows us to wedge it in
+# at the beginning of phase 1's scripting in meta-runit...
+touch /tmp/exqisite
+/usr/bin/exquisite -fb -fs -t /usr/share/efl-themes/bootsplash/default.edj &
+
+# Set aside a ruleset for how to increment the status bar...
+BOOTCOUNT=$(ls /etc/runit/core-services/*.sh | wc -l)
+PROG_INCR=$((100/$BOOTCOUNT))
+PROGRESS=0
+
+# Provide hooks that can be used to update status, msg, etc.
+# in phase 1.
+function set_splash_progress {
+    /usr/bin/exquisite_write "PROGRESS ${1}"
+}
+function set_splash_msg {
+    /usr/bin/exquisite_write "MSG ${1}"
+}
+function incr_splash_progress {
+    PROGRESS=$(($PROGRESS+$PROG_INCR))
+    set_splash_progress $PROGRESS
+}
+
+function shutdown_splash {
+    /usr/bin/exquisite_write "QUIT"
+}

@@ -3,7 +3,7 @@
 # recipe specific sysroot support.  You never know with this stuff
 # Since people are lagging a bit on OE and we're working on latest (But
 # not bleeding edge...)
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 # Side-step a problem with config/build that is with specifically this
 # metadata set that's not obvious- we don't have a step that actually

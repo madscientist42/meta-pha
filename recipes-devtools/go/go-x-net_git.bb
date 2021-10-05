@@ -21,7 +21,7 @@ do_install() {
     rm -rf ${D}${libdir}/go/src/${GO_IMPORT}/windows
 }
 
-FILES_${PN} = "${libdir}/go/src"
+FILES:${PN} = "${libdir}/go/src"
 
 
 

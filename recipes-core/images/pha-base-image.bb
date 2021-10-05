@@ -6,7 +6,7 @@ IMAGE_LINGUAS = "en-us"
 inherit core-image
 
 # Handle RPi2 boot support...
-DEPENDS_raspberrypi2 += "bcm2835-bootfiles"
+DEPENDS:apppend:raspberrypi2 := "bcm2835-bootfiles"
 
 # BSP specific (Drivers, etc...) and core OS features here...
 CORE_OS = " \
@@ -21,7 +21,6 @@ CORE_OS = " \
     udev-rules-rpi \
     linux-firmware-ralink \
     linux-firmware-bcm43430 \
-    rtl88x2bu \
     bluez5 \
     bluez5-noinst-tools \
     batctl \
@@ -32,6 +31,13 @@ CORE_OS = " \
     dtbocfg \
     pha-svcs \
     "
+
+# Remove a few things from above IF we're running an X86_64 QEMU or similar
+CORE_OS:remove:qemux86-64 = " rtl88x2bu"
+CORE_OS:remove:qemux86-64 = " dtbocfg"
+CORE_OS:remove:qemux86-64 = " kernel-devicetree"
+CORE_OS:remove:intel-corei7-64 = " dtbocfg"
+CORE_OS:remove:intel-corei7-64 = " kernel-devicetree"
 
 # Higher-level network stuff, but not things like webservers (Those are
 # apps and external tools...)

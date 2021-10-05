@@ -4,7 +4,7 @@ IMAGE_LINGUAS = "en-us"
 inherit core-image extrausers
 
 # Handle RPi2 boot support...
-DEPENDS_raspberrypi2 += "bcm2835-bootfiles"
+DEPENDS:append:raspberrypi2 := "bcm2835-bootfiles"
 
 # Core components.
 CORE_OS = " \

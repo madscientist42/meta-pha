@@ -9,12 +9,12 @@ SRC_URI = "\
 
 SRCREV = "5e8359464938163f2a308710c3f489e2e5d9a7c8"
 
-RDEPENDS_${PN} = "bash"
+RDEPENDS:${PN} = "bash"
 
 S = "${WORKDIR}/git"
 
 # Install only process.  It's a shell script that automates these processes
-# for everyone in a much easier manner than the steps to do it with the 
+# for everyone in a much easier manner than the steps to do it with the
 # "official" tools
 do_compile[noexec] = "1"
 do_install () {

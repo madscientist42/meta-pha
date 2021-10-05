@@ -4,7 +4,7 @@
 # for a DISTRO_FEATURE, we should **NOT** be jamming in wpa_supplicant there.
 # Bluez & Wifi are not mandatory except for handover
 WIFI_MGR = "${@bb.utils.contains('DISTRO_FEATURES', 'iwd', 'iwd', 'wpa-supplicant', d)}"
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wifi','${WIFI_MGR}', '', d)} \
     "

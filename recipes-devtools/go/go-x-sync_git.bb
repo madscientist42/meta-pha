@@ -19,6 +19,6 @@ do_install() {
     cp -Rp --no-preserve=ownership ${S}/* ${D}${libdir}/go/src/${GO_IMPORT}
 }
 
-FILES_${PN} = "${libdir}/go/src"
+FILES:${PN} = "${libdir}/go/src"
 
 

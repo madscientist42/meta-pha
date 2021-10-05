@@ -18,7 +18,7 @@ DEPENDS = "virtual/kernel"
 
 inherit module
 
-EXTRA_OEMAKE  = "ARCH=${ARCH} -C ${STAGING_KERNEL_BUILDDIR}"
+EXTRA_OEMAKE = "ARCH=${ARCH} -C ${STAGING_KERNEL_BUILDDIR}"
 
 do_compile () {
     unset LDFLAGS

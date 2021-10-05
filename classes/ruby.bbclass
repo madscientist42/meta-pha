@@ -3,7 +3,7 @@ BPV ?= "${PV}"
 DEPENDS += " \
     ruby-native \
 "
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ruby \
 "
 
@@ -19,7 +19,7 @@ def get_rubyversion(p):
        return found_version
 
     version = subprocess.Popen([cmd, "--version"], stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
-    
+
     r = re.compile("ruby ([0-9]+\.[0-9]+\.[0-9]+)*")
     m = r.match(version)
     if m:
@@ -61,7 +61,7 @@ def get_rubygemsversion(p):
        return found_version
 
     version = subprocess.Popen([cmd, "env", "gemdir"], stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
-    
+
     r = re.compile(".*([0-9]+\.[0-9]+\.[0-9]+)$")
     m = r.match(version)
     if m:
@@ -106,7 +106,7 @@ EXPORT_FUNCTIONS do_compile do_install
 
 PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-dev"
 
-FILES_${PN}-dbg += " \
+FILES:${PN}-dbg += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/.debug \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/.debug \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/*/.debug \
@@ -117,7 +117,7 @@ FILES_${PN}-dbg += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/*/*/*/.debug \
         "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/cache \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin \
@@ -126,6 +126,6 @@ FILES_${PN} += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions \
         "
 
-FILES_${PN}-doc += " \
+FILES:${PN}-doc += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/doc \
         "

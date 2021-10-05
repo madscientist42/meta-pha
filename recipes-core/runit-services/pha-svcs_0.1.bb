@@ -13,8 +13,9 @@ SRC_URI = " \
 	"
 
 # For now, we're going to make this subject to application when we're
-# a Neo-Plus2...
-SRC_URI_append_nanopi-neo-plus2 = " \
+# a Neo-Plus2...  (FIXME- We need to review if BlueZ has the issue fixed
+# we're side-stepping with this...)
+SRC_URI:append:nanopi-neo-plus2 = " \
 	file://sv/bt_radio_svc/run \
     "
 

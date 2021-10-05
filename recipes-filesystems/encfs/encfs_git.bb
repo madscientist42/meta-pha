@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=951b5c8c6c484058f2eafac08b65c272"
 S = "${WORKDIR}/git"
 
 DEPENDS = "fuse rlog openssl boost"
-RDEPENDS_encfs = "fuse rlog openssl boost"
+RDEPENDS:${PN} = "fuse rlog openssl boost"
 
 SRC_URI = "\
 	  git://github.com/vgough/encfs.git;protocol=https \

@@ -19,5 +19,5 @@ do_configure_prepend() {
     cp ${WORKDIR}/CMakeLists.txt ${S}
 }
 
-FILES_${PN} = "/usr/lib"
-FILES_${PN}-dev = "/usr/include"
+FILES:${PN} = "/usr/lib"
+FILES:${PN}-dev = "/usr/include"
