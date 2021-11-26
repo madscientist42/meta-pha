@@ -22,7 +22,7 @@ SRC_URI = "\
     file://00001-avoid-nulls-being-strduped.patch \
     "
 
-SRCREV = "2f51b51152e1096d93d9acba05076a5f682d63cd"
+SRCREV = "${PV}"
 
 # Builds with autotools
 inherit autotools-brokensep pkgconfig
