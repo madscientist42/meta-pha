@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2278eb2755b451372dde7ffeae8cde98"
 S = "${WORKDIR}/git"
 
 SRC_URI = "\
-	  git://github.com/jedisct1/libsodium.git;protocol=https \
-          "
+    git://github.com/jedisct1/libsodium.git;protocol=https \
+    "
 
-SRCREV = "24daccad117311f308d7df4fae4b21d997770452"
+SRCREV = "${PV}"
 
 # Builds with autotools...
 inherit autotools
