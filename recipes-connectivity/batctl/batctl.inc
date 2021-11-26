@@ -8,7 +8,7 @@ INC_PR = "r0"
 
 DEPENDS = "libnl pkgconfig pkgconfig-native"
 
-# This causes a QA warning flag- it's legit, but it probably needs to be expressed/flagged 
+# This causes a QA warning flag- it's legit, but it probably needs to be expressed/flagged
 # better so there's no warnings like this...
 #RDEPENDS_${PN} = "kernel-module-batman-adv"
 
