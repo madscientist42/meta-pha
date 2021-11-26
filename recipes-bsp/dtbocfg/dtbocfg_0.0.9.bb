@@ -6,10 +6,9 @@ HOMEPAGE = "https://github.com/ikwzm/dtbocfg"
 
 SRC_URI = " \
     git://github.com/ikwzm/dtbocfg.git;protocol=https \
-    file://makefile-fixes.patch \
     "
 
-SRCREV = "106b9fbf1d470f4fa1232d61b8a52d67cb8c4574"
+SRCREV = "v${PV}"
 
 S = "${WORKDIR}/git"
 
