@@ -1,0 +1,19 @@
+From 5cd71f6b804743f05bac565010eb05d5b985d45c Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Thu, 25 Nov 2021 20:04:36 -0600
+Subject: Fix build for something that's irrelevant for 5.x kernels
+
+
+diff --git a/sdio.c b/sdio.c
+index adec058..ff30180 100644
+--- a/sdio.c
++++ b/sdio.c
+@@ -15,7 +15,7 @@
+ #include <linux/mmc/sdio_func.h>
+ #include <linux/mmc/card.h>
+ #include <linux/mmc/sdio.h>
+-#include <asm/mach-types.h>
++//#include <asm/mach-types.h>
+ #include <linux/of.h>
+ #include <linux/of_irq.h>
+ 
