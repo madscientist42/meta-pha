@@ -1,0 +1,25 @@
+From 9e60b1f4e2eaece75125bde698798df4c51028ab Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Fri, 26 Nov 2021 01:59:30 -0600
+Subject: Add useful.h back into the build.
+
+Seems that there's a lot of people (e.g. IWD) that
+is using this file and in their INTERNAL version of
+this the Makefile.am has this and the Git repo one
+**DOESN'T** which speaks volumes about their Config
+Management...
+
+diff --git a/Makefile.am b/Makefile.am
+index 4e650c9..e81ee33 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -60,7 +60,8 @@ pkginclude_HEADERS = ell/ell.h \
+ 			ell/icmp6.h \
+ 			ell/acd.h \
+ 			ell/tester.h \
+-			ell/cleanup.h
++			ell/cleanup.h \
++            ell/useful.h
+ 
+ lib_LTLIBRARIES = ell/libell.la
+ 

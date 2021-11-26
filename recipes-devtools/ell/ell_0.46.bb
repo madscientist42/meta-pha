@@ -10,8 +10,11 @@ S = "${WORKDIR}/git"
 
 SRC_URI = "\
     git://git.kernel.org/pub/scm/libs/ell/ell.git;protocol=https \
+    file://reinstate_useful_h_to_installed.patch \
     "
 
+# If this is a version number, we just specify the tag.  If it's "git" in PV,
+# we're going to use a githash...
 SRCREV = "${PV}"
 
 # Builds with autotools
