@@ -10,8 +10,7 @@ SRC_URI = " \
     file://CMakeLists.txt \
     "
 
-SRC_URI[md5sum] = "0720a217952dbe05fba6e32ce430f7c7"
-SRC_URI[sha256sum] = "9a60f663b00de5f820bdb85806662e25f22da248b14942e33a8b43a0331f855a"
+SRC_URI[sha256sum] = "deaf463bbcc3eefa72f97199efb6213f7b0e2c8e91f1b3d2cbf52056a8715d15"
 
 S = "${WORKDIR}/${PN}"
 
