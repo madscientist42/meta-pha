@@ -28,7 +28,7 @@ for any of it at this time.
 Build and package this recipe in your Yocto build as part of the image spec.
 
 You will then need to specify one or two regulators for the xr819's 1.8v and 3.3v supplies in your device tree for it
-to work right here.  (for example, at: `.../linux_sources/linux-4.12-rc5/arch/arm/boot/dts/sun8i-h2-plus-orangepi-zero.dts`)
+to work right here.  (for example, at: `.../linux_sources/linux-4.12-rc5/arch/arm/boot/dts/sun8i-h2-plus-orangepi-zero.dts`
 
 The orange pi zero only has control over the 1.8v regulator and a 3.3v fixed regulator is provided elsewhere
 so we only need one here:
@@ -117,6 +117,7 @@ vqmcc-supply is apparently for the IO supply which is 3.3v for the orange pi zer
 swapping vqmmc and vmmc around results in the kernel complaining that the card's (the xr819)
 required IO voltage isn't supported. The setup above might not be technically correct but
 does work.
+
 The xr819 node should be self explanatory. The compatible string is used by the driver
 to find the node. The wake interrupt from the xr819 needs to be provided.
 
