@@ -14,6 +14,7 @@ SRC_URI = "\
     "
 
 SRCREV = "cc1b381f7d32596a2db4c0c36f3f38741a59add3"
+PV = "git+${SRCPV}"
 
 inherit cmake
 
