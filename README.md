@@ -1,6 +1,6 @@
 PHA Technologies' OE metadata layer and distribution base for their projects (and anyone else that we consult for).
 
-Supports the "Sumo" (2.5), "Thud" (2.6), "Warrior" (2.7), and Zeus (3.0) releases of Yocto/OE as a core for build at this time.  
+Supports the "Warrior" (2.7), Zeus (3.0), Dunfell (3.1), and Gatesgarth (3.2) releases of Yocto/OE as a core for build at this time.
 
 We support four of the latest Yocto versions at any one given time.  Dunfell (3.1) support is expected shortly.  Sumo official support will fall off at that time- mainly because there's a drift in metadata that precludes having more than abouut the last 4 or so as support.
 
