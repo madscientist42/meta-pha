@@ -5,7 +5,8 @@ SRC_URI  = " \
     file://connman \
     "
 
-SRCREV = "1ee420ace2b8edb0d4025f469aaa3d00d220dc98"
+SRCREV = "0ef47336dc92b101c6d87ed3a9fff4db36096007"
+PV = "git+${SRCPV}"
 
 SRC_URI:append:libc-musl = " file://0002-resolve-musl-does-not-implement-res_ninit.patch"
 
