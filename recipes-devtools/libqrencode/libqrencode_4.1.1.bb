@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-	  git://github.com/fukuchi/libqrencode.git;protocol=https \
-          "
+	git://github.com/fukuchi/libqrencode.git;protocol=https \
+    "
 
-SRCREV = "0ddcbc25ec5070ec6172eb86a0fe08fcb68bcf5f"
+SRCREV = "v${PV}"
 
 # We're a pkgconfig and autotools project...
 inherit pkgconfig autotools
