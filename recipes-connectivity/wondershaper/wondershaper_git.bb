@@ -7,7 +7,8 @@ SRC_URI = "\
     git://github.com/magnific0/wondershaper.git;protocol=https \
     "
 
-SRCREV = "5e8359464938163f2a308710c3f489e2e5d9a7c8"
+SRCREV = "98792b55c2ebf4ab4cafffb0780e0c4185fdc03d"
+PV = "git+${SRCPV}"
 
 RDEPENDS:${PN} = "bash"
 
