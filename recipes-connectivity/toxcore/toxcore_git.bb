@@ -11,10 +11,11 @@ RDEPENDS_toxcore = "libsodium"
 DEPENDS = "libsodium"
 
 SRC_URI = "\
-	  git://github.com/irungentoo/toxcore.git;protocol=https \
-          "
+    git://github.com/irungentoo/toxcore.git;protocol=https \
+    "
 
-SRCREV = "fda74a8454a028c9ec063f0074062e19fd25f7e7"
+SRCREV = "bf69b54f64003d160d759068f4816b2d9b2e1e21"
+PV = "git+${SRCPV}"
 
 # Builds with autotools...
 inherit autotools
