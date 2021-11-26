@@ -8,12 +8,11 @@ DEPENDS = "virtual/kernel"
 
 S = "${WORKDIR}/git"
 
-
 SRC_URI = "\
     git://git.kernel.org/pub/scm/libs/ell/ell.git;protocol=https \
     "
 
-SRCREV = "c156b921accae7d556f5d4166d02c0204cd50f56"
+SRCREV = "${PV}"
 
 # Builds with autotools
 inherit autotools-brokensep pkgconfig
