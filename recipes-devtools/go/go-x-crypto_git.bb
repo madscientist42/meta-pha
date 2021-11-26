@@ -7,7 +7,8 @@ SRC_URI = " \
     git://github.com/golang/crypto;protocol=https \
     "
 
-SRCREV = "34f69633bfdcf9db92f698f8487115767eebef81"
+SRCREV = "ae814b36b87190c757eede9bc2d32ed77df88551"
+PV = "git+${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -17,6 +18,8 @@ GO_IMPORT = "golang.org/x/crypto"
 do_install() {
     install -d ${D}${libdir}/go/src/${GO_IMPORT}
     cp -Rp --no-preserve=ownership ${S}/* ${D}${libdir}/go/src/${GO_IMPORT}
+    rm -f ${D}/usr/lib/go/src/golang.org/x/crypto/curve25519/internal/field/sync.sh
+    rm -rf ${D}/usr/lib/go/src/golang.org/x/crypto/ssh/test
 }
 
 FILES:${PN} = "${libdir}/go/src"

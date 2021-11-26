@@ -1,15 +1,16 @@
-DESCRIPTION = "Golang FUSE bindings"
-HOMEPAGE = "https://github.com/hanwen/go-fuse"
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=430d04ce687760975ee4d1833cfd5d4f"
+DESCRIPTION = "Golang Cryptography routines not in the Golang standard library"
+HOMEPAGE = "https://github.com/jacobsa/crypto"
+LICENSE = "Apache2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-GO_IMPORT = "github.com/hanwen/go-fuse"
+GO_IMPORT = "github.com/jacobsa/crypto"
 
 SRC_URI = " \
-    git://${GO_IMPORT} \
+    git://${GO_IMPORT};protocol=https \
     "
 
-SRCREV = "1266c0dcb6edad0f68613398974b339ea18cec5d"
+SRCREV = "9f44e2d11115452dad8f404f029574422855f46a"
+PV = "git+${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -30,4 +31,3 @@ remove_unit_tests() {
 do_patch[postfuncs] += " remove_unit_tests "
 
 FILES:${PN} = "${libdir}/go/src"
-

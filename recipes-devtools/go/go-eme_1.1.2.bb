@@ -1,15 +1,15 @@
-DESCRIPTION = "Golang Cryptography routines not in the Golang standard library"
-HOMEPAGE = "https://github.com/jacobsa/crypto"
-LICENSE = "Apache2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+DESCRIPTION = "Encrypt-Mix-Encrypt wide-block encryption for Golang"
+HOMEPAGE = "https://github.com/rfjakob/eme"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6fee026f0b48abb4d7cd72e25032503c"
 
-GO_IMPORT = "github.com/jacobsa/crypto"
+GO_IMPORT = "github.com/rfjakob/eme"
 
 SRC_URI = " \
     git://${GO_IMPORT};protocol=https \
     "
 
-SRCREV = "9f44e2d11115452dad8f404f029574422855f46a"
+SRCREV = "v${PV}"
 
 S = "${WORKDIR}/git"
 
@@ -26,7 +26,9 @@ remove_unit_tests() {
     rm -rf ${S}/src/${GO_IMPORT}/test
     rm -rf ${S}/src/${GO_IMPORT}/tests
     find ${S} -name test* -exec rm -f {} \;
+    find ${S} -name benchmark* -exec rm -f {} \;
 }
 do_patch[postfuncs] += " remove_unit_tests "
 
 FILES:${PN} = "${libdir}/go/src"
+

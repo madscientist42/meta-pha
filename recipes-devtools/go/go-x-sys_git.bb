@@ -7,7 +7,8 @@ SRC_URI = " \
     git://github.com/golang/sys;protocol=https \
     "
 
-SRCREV = "06d7bd2c5f4f4a6cc6e910b611851044253bd7d1"
+SRCREV = "fe61309f888157de161a48facf03d9412635cffe"
+PV = "git+${SRCPV}"
 
 S = "${WORKDIR}/git"
 

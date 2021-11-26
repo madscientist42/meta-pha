@@ -4,10 +4,11 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5d4950ecb7b26d2c5e4e7b4e0dd74707"
 
 SRC_URI = " \
-    git://github.com/golang/sync;protocol=https \
+    git://github.com/golang/sync;protocol=https;branch=master \
     "
 
-SRCREV = "cd5d95a43a6e21273425c7ae415d3df9ea832eeb"
+SRCREV = "036812b2e83c0ddf193dd5a34e034151da389d09"
+PV = "git+${SRCPV}"
 
 S = "${WORKDIR}/git"
 
