@@ -10,6 +10,7 @@ S = "${WORKDIR}/git"
 
 SRC_URI = "git://github.com/madscientist42/CurvedSalsa.git;protocol=https;branch=master"
 SRCREV = "88ae61e009a6f9229f0412d0a8e6641b4197d60c"
+PV = "git+${SRCPV}"
 
 DEPENDS = "boost"
 RDEPENDS:${PN} = "boost"
