@@ -27,7 +27,6 @@ CORE_OS = " \
     boost \
     rpe-tools \
     brcm-patchram-plus \
-    ap6212-bt-firmware \
     dtbocfg \
     pha-svcs \
     "
