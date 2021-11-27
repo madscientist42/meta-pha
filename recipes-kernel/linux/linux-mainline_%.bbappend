@@ -9,5 +9,8 @@ inherit pha-menuconfig
 # Add a few kernel configs for select additional support items...
 SRC_URI:append = " \
     file://initramfs-image-bundle.cfg \
+    file://configfs-support.cfg \
+    file://squashfs-extensions.cfg \
+    file://cifs-support.cfg \
     "
 
