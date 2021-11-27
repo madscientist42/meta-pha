@@ -64,11 +64,16 @@ WIFI_SUPPORT = " \
     iwd \
     "
 
+#
+# Pulled for now.  Doesn't really belong in this
+# for a non-wayland/non-X11 system...
+#
+#     glmark2
+#
 TEST_SUPPORT = " \
     iperf3 \
     bonnie++ \
     iozone3 \
-    glmark2 \
     gdb \
     "
 
