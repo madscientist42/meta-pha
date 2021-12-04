@@ -12,5 +12,8 @@ SRC_URI:append = " \
     file://configfs-support.cfg \
     file://squashfs-extensions.cfg \
     file://cifs-support.cfg \
+    file://crypto-support.cfg \
+    file://rfkill-support.cfg \
+    file://batman-adv-support.cfg \
     "
 
