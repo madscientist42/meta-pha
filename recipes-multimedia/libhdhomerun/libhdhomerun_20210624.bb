@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "deaf463bbcc3eefa72f97199efb6213f7b0e2c8e91f1b3d2cbf52056a8
 
 S = "${WORKDIR}/${PN}"
 
-do_configure_prepend() {
+do_configure:prepend() {
     cp ${WORKDIR}/CMakeLists.txt ${S}
 }
 

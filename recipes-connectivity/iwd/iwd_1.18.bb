@@ -28,7 +28,7 @@ SRCREV = "${PV}"
 inherit autotools-brokensep pkgconfig
 
 # Need to run the bootstrap script...
-do_configure_prepend() {
+do_configure:prepend() {
     ${S}/bootstrap
 }
 

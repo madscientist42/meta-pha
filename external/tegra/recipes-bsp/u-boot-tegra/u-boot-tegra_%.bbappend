@@ -11,6 +11,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 # going to symlink it here (which should've had a symlink or copy done
 # per other patches, etc. in later versions of U-Boot...)in our recipe
 # so that it's assured to do the right things period.
-do_configure_append() {
+do_configure:append() {
     ln -s -f ${S}/include/version.h ${S}/tools
 }

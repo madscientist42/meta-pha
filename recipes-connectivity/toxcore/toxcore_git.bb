@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 S = "${WORKDIR}/git"
 
 # TOXcore requires libsodium and a few other things...
-RDEPENDS_toxcore = "libsodium"
+RDEPENDS:toxcore = "libsodium"
 DEPENDS = "libsodium"
 
 SRC_URI = "\
@@ -21,7 +21,7 @@ PV = "git+${SRCPV}"
 inherit autotools
 
 # But, use the autogen.sh scripting first...
-do_configure_prepend() {
+do_configure:prepend() {
         cd ${S}
         NOCONFIGURE=yes ./autogen.sh
         cd ${B}

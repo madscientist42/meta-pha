@@ -77,7 +77,7 @@ ALTERNATIVE:${PN} = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-co
 ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv-conf.connman','',d)}"
 ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
 
-do_install_append() {
+do_install:append() {
 	if ${@bb.utils.contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
 		install -d ${D}${sysconfdir}/init.d
 		install -m 0755 ${WORKDIR}/connman ${D}${sysconfdir}/init.d/connman
@@ -128,7 +128,7 @@ def add_rdepends(bb, d, file, pkg, depmap, multilib_prefix, add_insane_skip):
     if add_insane_skip:
         d.appendVar("INSANE_SKIP_%s" % pkg, "dev-so")
 
-python populate_packages_prepend() {
+python populate_packages:prepend() {
     depmap = dict(pppd="ppp")
     multilib_prefix = (d.getVar("MLPREFIX") or "")
 

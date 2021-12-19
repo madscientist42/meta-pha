@@ -3,6 +3,5 @@
 require pha-x11-image.bb
 
 IMAGE_INSTALL += " \
-    google-apex \
     python3-tensorflow-lite \
     "

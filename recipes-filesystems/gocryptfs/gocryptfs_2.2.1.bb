@@ -19,7 +19,7 @@ SRCREV = "v${PV}"
 S = "${WORKDIR}/git"
 
 # Use the golang NATIVE crypto solution....
-GOBUILDFLAGS_append = " -tags without_openssl"
+GOBUILDFLAGS:append = " -tags without_openssl"
 
 GO_INSTALL = "${GO_IMPORT}"
 
@@ -35,4 +35,4 @@ do_patch[postfuncs] += " remove_unit_tests "
 
 do_compile_ptest_base[noexec] = "1"
 
-RDEPENDS_${PN}-dev = "bash"
+RDEPENDS:${PN}-dev = "bash"

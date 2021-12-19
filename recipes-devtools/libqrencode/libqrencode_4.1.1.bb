@@ -16,7 +16,7 @@ SRCREV = "v${PV}"
 inherit pkgconfig autotools
 
 # But there's a nifty autogen.sh, so let's make sure to USE it.
-do_configure_prepend() {
+do_configure:prepend() {
         cd ${S}
         NOCONFIGURE=yes ./autogen.sh
         cd ${B}
