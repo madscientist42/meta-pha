@@ -29,6 +29,7 @@ CORE_OS = " \
     brcm-patchram-plus \
     dtbocfg \
     pha-svcs \
+    target-dtbos \
     "
 
 # Remove a few things from above IF we're running an X86_64 QEMU or similar

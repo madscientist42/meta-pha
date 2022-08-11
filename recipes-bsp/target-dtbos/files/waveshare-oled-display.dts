@@ -1,0 +1,112 @@
+/*
+    Waveshare OLED display and button board DTB definition
+*/
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+
+/dts-v1/;
+/plugin/;
+
+&{/} {
+    compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";
+
+    /* Button panels overlay */
+    gpiokeys {
+        compatible = "gpio-keys";
+
+        /* Handle the buttons on the side... */
+        key_1 {
+            label = "Key 1";
+			gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+			linux,code = <>;
+			debounce-interval = <60>;
+        };
+
+        key_2 {
+            label = "Key 2";
+			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
+			linux,code = <>;
+			debounce-interval = <60>;
+        };
+
+        key_3 {
+            label = "Key 3";
+			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
+			linux,code = <>;
+			debounce-interval = <60>;
+        };
+
+        /* Handle the joypad... */
+        joypad_up {
+            label = "Joypad Up";
+			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
+			linux,code = <>;
+			debounce-interval = <60>;
+        };
+
+        joypad_down {
+            label = "Joypad Down";
+			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
+			linux,code = <>;
+			debounce-interval = <60>;
+        };
+
+        joypad_left {
+            label = "Joypad Left";
+			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
+			linux,code = <>;
+			debounce-interval = <60>;
+        };
+
+        joypad_right {
+            label = "Joypad Right";
+			gpios = <&gpio 26 GPIO_ACTIVE_LOW>;
+			linux,code = <>;
+			debounce-interval = <60>;
+        };
+
+        joypad_ok {
+            label = "Joypad Ok";
+			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_OK>;
+			debounce-interval = <60>;
+        };
+    };
+
+    /* Handle the control pins for the display panel*/
+    gpio {
+        sh1106_pins: sh1106_pins {
+            brcm,pins = <25 24>;
+            brcm,function = <1 1>; /* out */
+        };
+    };
+
+    spi0 {
+        /* Make sure it's turned on */
+        status = "okay";
+
+        /* Cripple out the raw dev accesses...*/
+		spidev@0{
+				status = "disabled";
+			};
+
+        spidev@1{
+            status = "disabled";
+        };
+
+        sh1106: sh1106@0{
+            compatible = "sinowealth,sh1106";
+            reg = <0>;
+            pinctrl-names = "default";
+            pinctrl-0 = <&sh1106_pins>;
+            spi-max-frequency = <8000000>;
+            buswidth = <8>;
+            fps = <20>;
+            reset-gpios = <&gpio 25 0>;
+            dc-gpios = <&gpio 24 0>;
+            debug = <0>;
+        };
+    };
+};
+

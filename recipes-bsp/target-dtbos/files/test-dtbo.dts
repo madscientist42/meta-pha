@@ -1,0 +1,16 @@
+/*
+    Test DTBO to properly verify dtbocfg for targets that don't have
+    any current DTBO definitions yet.
+*/
+
+/dts-v1/;
+/plugin/;
+
+/*  This is using the nifty, new direct addressing method from the later on dtc
+    compilers.  It's the current proper overlay syntax for most cases. */
+&{/} {
+    test_annex{
+        test1 = "test1";
+        test2 = "test2";
+    };
+};

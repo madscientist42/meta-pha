@@ -15,5 +15,6 @@ SRC_URI:append = " \
     file://crypto-support.cfg \
     file://rfkill-support.cfg \
     file://batman-adv-support.cfg \
+    file://dt-overlays.cfg \
     "
 
