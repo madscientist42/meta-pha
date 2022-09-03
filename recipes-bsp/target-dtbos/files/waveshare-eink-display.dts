@@ -46,7 +46,7 @@
                 pinctrl-names = "default";
                 pinctrl-0 = <&ssd1680fb_pins>;
 				spi-max-frequency = <12500000>;
-                solomon,partial-update = <1>;
+                /* solomon,partial-update = <1>; */
 				solomon,rst-gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 				solomon,dc-gpios = <&gpio 25 GPIO_ACTIVE_HIGH>;
 				solomon,busy-gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
