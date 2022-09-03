@@ -1,0 +1,58 @@
+// Waveshare Eink as frame buffer
+#include <dt-bindings/gpio/gpio.h>
+
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&spidev0>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@1 {
+		target = <&spidev1>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+    fragment@2 {
+        target = <&gpio>;
+        __overlay__ {
+            ssd1680fb_pins: ssd1680fb_pins {
+                    brcm,pins = <17 24 25>;
+                    brcm,function = <1>; /* out */
+            };
+        };
+    };
+
+	fragment@3 {
+		target = <&spi0>;
+		__overlay__ {
+			/* needed to avoid dtc warning */
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			status = "okay";
+
+			ssd1680fb@0 {
+				compatible = "waveshare,213";
+				reg = <0>; /* CE0 */
+                pinctrl-names = "default";
+                pinctrl-0 = <&ssd1680fb_pins>;
+				spi-max-frequency = <12500000>;
+                solomon,partial-update = <1>;
+				solomon,rst-gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
+				solomon,dc-gpios = <&gpio 25 GPIO_ACTIVE_HIGH>;
+				solomon,busy-gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
+				status = "okay";
+			};
+		};
+	};
+
+};

@@ -9,6 +9,7 @@ inherit pha-menuconfig
 SRC_URI:append := " \
 	file://ADS1015_support.cfg \
 	file://hauppauge_usb_tuner.cfg \
+    file://fbtft.cfg \
 	"
 
 # Set the crypto support where we want it for the kernel.

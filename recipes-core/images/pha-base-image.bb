@@ -30,6 +30,7 @@ CORE_OS = " \
     dtbocfg \
     pha-svcs \
     target-dtbos \
+    fb-ws-eink \
     "
 
 # Remove a few things from above IF we're running an X86_64 QEMU or similar

@@ -1,5 +1,6 @@
 /*
-    Waveshare OLED display and button board DTB definition
+    Waveshare mini OLED display and button board DTB definition- this is a bit of an
+    aggregation of the kernel sh1106 DTBO and the button panel they define in their wiki.
 */
 
 #include <dt-bindings/gpio/gpio.h>
@@ -8,105 +9,143 @@
 /dts-v1/;
 /plugin/;
 
-&{/} {
-    compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";
+/ {
 
-    /* Button panels overlay */
-    gpiokeys {
-        compatible = "gpio-keys";
+    compatible = "brcm,bcm2835";
 
-        /* Handle the buttons on the side... */
-        key_1 {
-            label = "Key 1";
-			gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
-			linux,code = <>;
-			debounce-interval = <60>;
-        };
+    /* Button panels overlay - We have a set of three and a joypad with a center click */
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            gpiokeys {
+                compatible = "gpio-keys";
 
-        key_2 {
-            label = "Key 2";
-			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
-			linux,code = <>;
-			debounce-interval = <60>;
-        };
+                /* Handle the buttons on the side... */
+                key_1 {
+                    label = "Key 1";
+                    gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+                    linux,code = <KEY_1>;
+                    debounce-interval = <60>;
+                };
 
-        key_3 {
-            label = "Key 3";
-			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
-			linux,code = <>;
-			debounce-interval = <60>;
-        };
+                key_2 {
+                    label = "Key 2";
+                    gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
+                    linux,code = <KEY_2>;
+                    debounce-interval = <60>;
+                };
 
-        /* Handle the joypad... */
-        joypad_up {
-            label = "Joypad Up";
-			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
-			linux,code = <>;
-			debounce-interval = <60>;
-        };
+                key_3 {
+                    label = "Key 3";
+                    gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
+                    linux,code = <KEY_3>;
+                    debounce-interval = <60>;
+                };
 
-        joypad_down {
-            label = "Joypad Down";
-			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
-			linux,code = <>;
-			debounce-interval = <60>;
-        };
+                /* Handle the joypad... */
+                joypad_up {
+                    label = "Joypad Up";
+                    gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
+                    linux,code = <KEY_UP>;
+                    debounce-interval = <60>;
+                };
 
-        joypad_left {
-            label = "Joypad Left";
-			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
-			linux,code = <>;
-			debounce-interval = <60>;
-        };
+                joypad_down {
+                    label = "Joypad Down";
+                    gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
+                    linux,code = <KEY_DOWN>;
+                    debounce-interval = <60>;
+                };
 
-        joypad_right {
-            label = "Joypad Right";
-			gpios = <&gpio 26 GPIO_ACTIVE_LOW>;
-			linux,code = <>;
-			debounce-interval = <60>;
-        };
+                joypad_left {
+                    label = "Joypad Left";
+                    gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
+                    linux,code = <KEY_LEFT>;
+                    debounce-interval = <60>;
+                };
 
-        joypad_ok {
-            label = "Joypad Ok";
-			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
-			linux,code = <KEY_OK>;
-			debounce-interval = <60>;
-        };
-    };
+                joypad_right {
+                    label = "Joypad Right";
+                    gpios = <&gpio 26 GPIO_ACTIVE_LOW>;
+                    linux,code = <KEY_RIGHT>;
+                    debounce-interval = <60>;
+                };
 
-    /* Handle the control pins for the display panel*/
-    gpio {
-        sh1106_pins: sh1106_pins {
-            brcm,pins = <25 24>;
-            brcm,function = <1 1>; /* out */
+                joypad_ok {
+                    label = "Joypad Ok";
+                    gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
+                    linux,code = <KEY_OK>;
+                    debounce-interval = <60>;
+                };
+            };
         };
     };
 
-    spi0 {
-        /* Make sure it's turned on */
-        status = "okay";
-
-        /* Cripple out the raw dev accesses...*/
-		spidev@0{
-				status = "disabled";
-			};
-
-        spidev@1{
-            status = "disabled";
+    /* Handle adding the control pins for the display panel*/
+    fragment@1 {
+        target= <&gpio>;
+        __overlay__ {
+            sh1106_pins: sh1106_pins {
+                brcm,pins = <25 24>;
+                brcm,function = <1 1>; /* out */
+            };
         };
+    };
 
-        sh1106: sh1106@0{
-            compatible = "sinowealth,sh1106";
-            reg = <0>;
-            pinctrl-names = "default";
-            pinctrl-0 = <&sh1106_pins>;
-            spi-max-frequency = <8000000>;
-            buswidth = <8>;
-            fps = <20>;
-            reset-gpios = <&gpio 25 0>;
-            dc-gpios = <&gpio 24 0>;
-            debug = <0>;
+    /* Define and enable the star of the show...our OLED display */
+    fragment@2 {
+        target = <&spi0>;
+        __overlay__ {
+            /* needed to avoid dtc warning */
+            #address-cells = <1>;
+            #size-cells = <0>;
+
+            /* Make sure it's turned on */
+            status = "okay";
+
+            /* Cripple out the raw dev accesses...*/
+            spidev@0{
+                status = "disabled";
+            };
+
+            spidev@1{
+                status = "disabled";
+            };
+
+            /* Define the OLED display controller */
+            sh1106: sh1106@0{
+                compatible = "sinowealth,sh1106";
+                reg = <0>;
+                pinctrl-names = "default";
+                pinctrl-0 = <&sh1106_pins>;
+
+                spi-max-frequency = <4000000>;
+                bgr = <0>;
+                bpp = <1>;
+                rotate = <0>;
+                fps = <25>;
+                buswidth = <8>;
+                reset-gpios = <&gpio 25 1>;
+                dc-gpios = <&gpio 24 0>;
+                debug = <0>;
+
+                sinowealth,height = <64>;
+                sinowealth,width = <128>;
+                sinowealth,page-offset = <0>;
+            };
         };
+    };
+
+    __overrides__ {
+        speed     = <&sh1106>,"spi-max-frequency:0";
+        rotate    = <&sh1106>,"rotate:0";
+        fps       = <&sh1106>,"fps:0";
+        debug     = <&sh1106>,"debug:0";
+        dc_pin    = <&sh1106>,"dc-gpios:4",
+                    <&sh1106_pins>,"brcm,pins:4";
+        reset_pin = <&sh1106>,"reset-gpios:4",
+                    <&sh1106_pins>,"brcm,pins:0";
+        height    = <&sh1106>,"sinowealth,height:0";
     };
 };
 
