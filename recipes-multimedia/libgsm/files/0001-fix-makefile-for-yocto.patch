@@ -1,0 +1,72 @@
+From 8c5278defb8665e472240ed14596740dec945d0e Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Wed, 21 Sep 2022 11:50:29 -0500
+Subject: Fix makefile to work with Yocto in cross compile.
+
+
+diff --git a/Makefile b/Makefile
+index 2ad5e5d..e2a1f83 100644
+--- a/Makefile
++++ b/Makefile
+@@ -17,14 +17,14 @@ SASR	= -DSASR
+ 
+ # LTP_CUT	= -DLTP_CUT
+ LTP_CUT	=
+-######### Define to enable the GSM library's long-term correlation 
++######### Define to enable the GSM library's long-term correlation
+ ######### approximation option---faster, but worse; works for
+ ######### both integer and floating point multiplications.
+ ######### This flag is still in the experimental stage.
+ 
+ WAV49	= -DWAV49
+ # WAV49	=
+-######### Define to enable the GSM library's option to pack GSM frames 
++######### Define to enable the GSM library's option to pack GSM frames
+ ######### in the style used by the WAV #49 format.  If you want to write
+ ######### a tool that produces .WAV files which contain GSM-encoded data,
+ ######### define this, and read about the GSM_OPT_WAV49 option in the
+@@ -43,8 +43,8 @@ WAV49	= -DWAV49
+ # CC		= /usr/lang/acc
+ # CCFLAGS 	= -c -O
+ 
+-CC		= gcc -ansi -pedantic
+-CCFLAGS 	= -c -O2 -DNeedFunctionPrototypes=1 -Wall -Wno-comment
++#CC		= gcc -ansi -pedantic
++CCFLAGS 	= -ansi -pedantic -c -O2 -DNeedFunctionPrototypes=1 -Wall -Wno-comment
+ 
+ LD 		= $(CC)
+ 
+@@ -103,13 +103,13 @@ ARFLAGS		= cr
+ RMFLAGS		= -f
+ FIND		= find
+ COMPRESS 	= gzip
+-COMPRESSFLAGS 	= 
++COMPRESSFLAGS 	=
+ # RANLIB 	= true
+ RANLIB	 	= ranlib
+ 
+ #
+ #    You shouldn't have to configure below this line if you're porting.
+-# 
++#
+ 
+ 
+ # Local Directories
+@@ -463,7 +463,7 @@ $(ADDTST)/add:	$(ADDTST)/add_test.o
+ # format used by the tests we ran (.cod).  We paid for the test data,
+ # so I guess we can't just provide them with this package.  Still,
+ # if you happen to have them lying around, here's the code.
+-# 
++#
+ # You can use gsm2cod | cod2txt independently to look at what's
+ # coded inside the compressed frames, although this shouldn't be
+ # hard to roll on your own using the gsm_print() function from
+@@ -471,7 +471,7 @@ $(ADDTST)/add:	$(ADDTST)/add_test.o
+ 
+ 
+ $(TST)/test-result:	$(TST)/lin2cod $(TST)/cod2lin $(TOAST) $(TST)/run
+-			( cd $(TST); ./run ) 
++			( cd $(TST); ./run )
+ 
+ $(TST)/lin2txt:		$(TST)/lin2txt.o $(LIBGSM)
+ 			$(LD) $(LFLAGS) -o $(TST)/lin2txt \

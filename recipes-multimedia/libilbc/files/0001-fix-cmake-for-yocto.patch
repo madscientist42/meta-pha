@@ -1,0 +1,26 @@
+From 15218e5f980ab7de6d71a6cf66699b910529b0c9 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Wed, 21 Sep 2022 22:28:41 -0500
+Subject: Fix CMAKE config to Cross-Compile right
+
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 52a12aea4b..e357ef3153 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -52,13 +52,13 @@ set(CMAKE_CXX_STANDARD 14)
+ 
+ if((CMAKE_C_COMPILER_ID STREQUAL "GNU") OR
+    (CMAKE_C_COMPILER_ID MATCHES "Clang" AND CMAKE_C_COMPILER_FRONTEND_VARIANT STREQUAL "GNU"))
+-    set(CMAKE_C_FLAGS "-Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -Wno-unused-parameter -fno-strict-aliasing")
++    set(CMAKE_C_FLAGS "-Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -Wno-unused-parameter -fno-strict-aliasing ${CMAKE_C_FLAGS}")
+     set(CMAKE_C_FLAGS_DEBUG "-g")
+     set(CMAKE_C_FLAGS_RELEASE "-O2")
+ endif()
+ if((CMAKE_CXX_COMPILER_ID STREQUAL "GNU") OR
+    (CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "GNU"))
+-    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -fno-strict-aliasing")
++    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -fno-strict-aliasing ${CMAKE_CXX_FLAGS}")
+     set(CMAKE_CXX_FLAGS_DEBUG "-g")
+     set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+ endif()
