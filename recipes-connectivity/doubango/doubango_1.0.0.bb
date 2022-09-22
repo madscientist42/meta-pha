@@ -5,15 +5,15 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://Licensing.md;md5=30f1fe3b9d227ca76fe5efe11f37cb68"
 
 inherit autotools-brokensep pkgconfig
-prefix = "/usr"
+
 
 # FIXME!!
 #
-# Current missing functionality is SRTP and OpenH264- both have bitrot going on
-# due to drift in codebases on upstream.  We're not going to go and use OLD crap
-# in the implementation here for PHA Linux- we've forked it to do versioning right
-# so in for a penny, in for a pound.  We'll fix this over time along with the
-# silly build system.
+# Current missing functionality is iLBC, SRTP and OpenH264- all supports have
+# bitrot going on due to drift in codebases on upstream.  We're not going to go
+# and use OLD crap in the implementations here for PHA Linux- we've forked it
+# to go do versioning right, so in for a penny, in for a pound.  We'll fix this
+# over time along with the silly build system.
 
 DEPENDS = " \
     alsa-lib \
