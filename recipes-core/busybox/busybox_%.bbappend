@@ -5,6 +5,6 @@
 LOCAL_FILES_PATH := "${THISDIR}/files"
 inherit pha-menuconfig
 
-SRC_URI:append += " \
+SRC_URI:append = " \
     file://enable_timeout_cmd.cfg \
     "

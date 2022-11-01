@@ -9,7 +9,7 @@ S = "${WORKDIR}/git"
 DEPENDS = "bluez5"
 
 SRC_URI = " \
-    git://github.com/madscientist42/brcm_patchram.git;protocol=https \
+    git://github.com/madscientist42/brcm_patchram.git;protocol=https;branch=master \
     "
 
 SRCREV = "48201687f51de13a93693d8d58c66b5e7c416e38"

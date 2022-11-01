@@ -10,7 +10,7 @@ DEPENDS = "fuse lwext4 acl"
 RDEPENDS:${PN} = "fuse lwext4 acl"
 
 SRC_URI = "\
-	git://github.com/madscientist42/fuse-lwext4.git;protocol=https \
+	git://github.com/madscientist42/fuse-lwext4.git;protocol=https;branch=master \
     "
 
 SRCREV = "cc1b381f7d32596a2db4c0c36f3f38741a59add3"

@@ -43,7 +43,7 @@ SRC_URI = " \
 # progress that's known to largely or completely work, this is what you want to
 # use here.
 #
-SRCREV = "v0.1"
+SRCREV = "428a46e4eab939a63c9173324304a540c4ca8ca3"
 
 # If you want to live *dangerously*, you can choose to use the "tip" of this fork.
 #
@@ -56,7 +56,9 @@ SRCREV = "v0.1"
 # Complaints against this tip...they'll be happily ignored by myself or anyone in
 # the team on this note.
 #
-# SRCREV = "6bf0e2e21c80456e2a3d4ad1267caecde7165871"
+# SRCREV = ""
+#
+# (Yes, there's no official tip right now other than the above...)
 
 S = "${WORKDIR}/git"
 PV = "git+${SRCPV}"

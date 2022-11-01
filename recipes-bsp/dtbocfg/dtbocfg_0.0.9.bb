@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6e83d63de93384e6cce0fd3632041d91"
 HOMEPAGE = "https://github.com/ikwzm/dtbocfg"
 
 SRC_URI = " \
-    git://github.com/ikwzm/dtbocfg.git;protocol=https \
+    git://github.com/ikwzm/dtbocfg.git;protocol=https;branch=master \
     "
 
-SRCREV = "v${PV}"
+SRCREV = "2d5593ba4fea35b75fce716a5d9538f984493cbd"
 
 S = "${WORKDIR}/git"
 
