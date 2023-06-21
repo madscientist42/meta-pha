@@ -2,7 +2,7 @@ DESCRIPTION = "Control application for B.A.T.M.A.N. routing protocol kernel modu
 HOMEPAGE = "http://www.open-mesh.net/"
 SECTION = "console/network"
 PRIORITY = "optional"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 
 INC_PR = "r0"
 
