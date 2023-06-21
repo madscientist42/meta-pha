@@ -11,7 +11,7 @@ RDEPENDS:toxcore = "libsodium"
 DEPENDS = "libsodium"
 
 SRC_URI = "\
-    git://github.com/irungentoo/toxcore.git;protocol=https \
+    git://github.com/irungentoo/toxcore.git;protocol=https;branch=master \
     "
 
 SRCREV = "bf69b54f64003d160d759068f4816b2d9b2e1e21"

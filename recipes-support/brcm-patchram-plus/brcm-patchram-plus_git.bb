@@ -15,7 +15,7 @@ SRC_URI = " \
 SRCREV = "48201687f51de13a93693d8d58c66b5e7c416e38"
 PV = "git+${SRCPV}"
 
-inherit cmake
+inherit cmake pkgconfig
 
 
 

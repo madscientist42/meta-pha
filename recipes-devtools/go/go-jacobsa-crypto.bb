@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 GO_IMPORT = "github.com/jacobsa/crypto"
 
 SRC_URI = " \
-    git://${GO_IMPORT};protocol=https \
+    git://${GO_IMPORT};protocol=https;branch=master \
     "
 
 SRCREV = "9f44e2d11115452dad8f404f029574422855f46a"

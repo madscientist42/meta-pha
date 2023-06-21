@@ -10,7 +10,7 @@ DEPENDS = "openal-soft"
 RDEPENDS:encfs = "openal-soft"
 
 SRC_URI = "\
-	  git://github.com/vancegroup/freealut.git;protocol=https \
+	  git://github.com/vancegroup/freealut.git;protocol=https;branch=master \
           "
 
 SRCREV = "fc814e316c2bfa6e05b723b8cc9cb276da141aae"

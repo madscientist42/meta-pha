@@ -1,13 +1,13 @@
 DESCRIPTION = "Portable, lightweight set of small, sharp tools for code dev"
 HOMEPAGE = "https://github.com/madscientist42/rpe_tools"
 SECTION = "devel/libs"
-LICENSE = "BSD"
+LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ab2b616c85c52a8640d3907ffcaf0469"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/madscientist42/rpe_tools.git;protocol=https \
+    git://github.com/madscientist42/rpe_tools.git;protocol=https;branch=master \
     "
 
 SRCREV = "146e018949bebaed44d0cde5060215dcc0c3a602"

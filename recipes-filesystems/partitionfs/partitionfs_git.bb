@@ -10,7 +10,7 @@ DEPENDS = "fuse parted"
 RDEPENDS:${PN} = "fuse parted"
 
 SRC_URI = "\
-	git://github.com/madscientist42/partitionfs.git;protocol=https \
+	git://github.com/madscientist42/partitionfs.git;protocol=https;branch=master \
     "
 
 SRCREV = "b366ebfbf0a6cfdf469b82c62da5b8befa87de26"

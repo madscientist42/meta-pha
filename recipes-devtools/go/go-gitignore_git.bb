@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bc1bb35f6ed8f35d0af3848bd675d349"
 GO_IMPORT = "github.com/sabhiram/go-gitignore"
 
 SRC_URI = " \
-    git://${GO_IMPORT};protocol=https \
+    git://${GO_IMPORT};protocol=https;branch=master \
     "
 
 SRCREV = "d3107576ba9425fc1c85f4b3569c4631b805a02e"

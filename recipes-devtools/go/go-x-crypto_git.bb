@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5d4950ecb7b26d2c5e4e7b4e0dd74707"
 
 SRC_URI = " \
-    git://github.com/golang/crypto;protocol=https \
+    git://github.com/golang/crypto;protocol=https;branch=master \
     "
 
 SRCREV = "ae814b36b87190c757eede9bc2d32ed77df88551"
