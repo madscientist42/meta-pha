@@ -1,6 +1,6 @@
 SUMMARY = "Dynamic Device Tree ConfigFS Kernel Module"
-DESCRIPTION = "Dynamic Device Tree ConfigFS Kernel Module"
-LICENSE = "BSD"
+DESCRIPTION = "Dynamic Device Tree ConfigFS Kernel Module, provided for systems that don't have proper support in the kernel for this."
+LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6e83d63de93384e6cce0fd3632041d91"
 HOMEPAGE = "https://github.com/ikwzm/dtbocfg"
 
