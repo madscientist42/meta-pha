@@ -12,7 +12,7 @@ SRC_URI += " \
 #        least partial updates/tricolor.  Make PV match the git hash
 #        so we know what we're doing and can discriminate between
 #        cuts of the repo as we do this.
-SRCREV = "${AUTOREV}"
+SRCREV = "0607c892e4a9a6f97cccffd4590bb99478cd2073"
 PV = "git${SRCPV}"
 
 S = "${WORKDIR}/git"
