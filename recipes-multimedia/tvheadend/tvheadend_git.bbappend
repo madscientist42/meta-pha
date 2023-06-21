@@ -15,25 +15,26 @@ RUNIT-SERVICES = " \
     "
 
 # Grab the latest...
-SRCREV = "221c29b40b1e53ae09a69d9458442dd4fea665f5"
+SRCREV = "1705297c27d76848a87cff34dd6bfe7d9d74c87a"
 
-# Now, let's expand what it does, what it DEPENDS/RDEPENDS on because we want
-# more (Like supporting HD Homeruns...) capability added to this recipe and
-# the build so that we can cut appliances for home PVRs with this stuff.
-DEPENDS += " \
-    libhdhomerun \
+# Handle supporting other configs for hardware that's present or not.  If the machine
+# is a Pi0/1/2/3/4 then we rather wanted to shift gears and turn on OMX support.  Do this
+# for each special case of HW support we're trying to support with the .bbappend we want
+# whatever HW transcode support that might exist here able to be used.
+DEPENDS:append:rpi= " \
     libomxil \
     "
 
-RDEPENDS:${PN} += " \
-    libhdhomerun \
+RDEPENDS:${PN}:append:rpi = " \
     libomxil \
     "
 
 EXTRA_OECONF += " \
-    --enable-omx \
-    --enable-hdhomerun_client \
     --disable-tvhcsa \
+    "
+
+EXTRA_OECONF:append:rpi = " \
+    --enable-omx \
     "
 
 

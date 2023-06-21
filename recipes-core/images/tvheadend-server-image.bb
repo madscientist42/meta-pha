@@ -30,7 +30,6 @@ CORE_OS = " \
 # Higher-level network stuff, but not things like webservers (Those are
 # apps and external tools...)
 NET_SUPPORT = " \
-    dhcp-client \
     openssh-ssh \
     openssh-scp \
     openssh-sftp \
