@@ -8,12 +8,19 @@ inherit core-image
 # Handle RPi2 boot support...
 DEPENDS:apppend:raspberrypi2 := "bcm2835-bootfiles"
 
+# Handle hooking the right Device Tree recipe to handle this for 
+# normal systems and at least the Xilinx systems...
+SYSTEM_DEVICETREE = "kernel-devicetree"
+SYSTEM_DEVICETREE:zynq = "device-tree"
+SYSTEM_DEVICETREE:zynqmp = "device-tree"
+
+
 # BSP specific (Drivers, etc...) and core OS features here...
 CORE_OS = " \
     packagegroup-core-boot \
     packagegroup-base \
     kernel-modules \
-    kernel-devicetree \
+    ${SYSTEM_DEVICETREE} \
     fuse \
     pkgconfig \
     bash \
@@ -30,7 +37,6 @@ CORE_OS = " \
     dtbocfg \
     pha-svcs \
     target-dtbos \
-    fb-ws-eink \
     "
 
 # Remove a few things from above IF we're running an X86_64 QEMU or similar
@@ -130,6 +136,3 @@ EXTRA_USERS_PARAMS = " \
     usermod -p $(openssl passwd toor) root; \
     "
 
-# Add a few features we support now...if we're told to do fpga-manager...
-FEATURE_PACKAGES_fpga-manager ?= "fpga-manager-script"
-FEATURE_PACKAGES_fpga-manager[optional] ?= "1"
