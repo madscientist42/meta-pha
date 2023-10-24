@@ -101,12 +101,22 @@ EXTRA_TOOLS_INSTALL = " \
     zip \
     "
 
+# Break out FPGA support...
+XILINX_SUPPORT = " \
+    fpga-manager-script \
+    "
+
+FPGA_SUPPORT = ""
+FPGA_SUPPORT:zynq = "${XILINX_SUPPORT}"
+FPGA_SUPPORT:zynqmp = "${XILINX_SUPPORT}"
+
 IMAGE_INSTALL += " \
     ${CORE_OS} \
     ${EXTRA_TOOLS_INSTALL} \
     ${TEST_SUPPORT} \
     ${NET_SUPPORT} \
     ${WIFI_SUPPORT} \
+    ${FPGA_SUPPORT} \
     "
 
 # Make our cross-compile chain include these things, just in case...
@@ -120,3 +130,6 @@ EXTRA_USERS_PARAMS = " \
     usermod -p $(openssl passwd toor) root; \
     "
 
+# Add a few features we support now...if we're told to do fpga-manager...
+FEATURE_PACKAGES_fpga-manager ?= "fpga-manager-script"
+FEATURE_PACKAGES_fpga-manager[optional] ?= "1"
