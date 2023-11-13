@@ -1,7 +1,9 @@
-# Extend the search path to this directory...
-FILESEXTRAPATHS:append = ":${THISDIR}/files"
+# Extend out searches to our directory...make it FIRST in search.
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-# Provide for custom .xsa files from FPGA builds intended to be on specific
-# machine targets here...
-HDF_BASE:pha-zynq-z2 = "file://"
-HDF_PATH:pha-zynq-z2 = "pha-pynq-z2.xsa"
+# Declare out our specifications for the .xsa that belongs
+# to our various machines in this layer...
+HDF_BASE = "file://"
+
+# PYNQ-Z2 for PHA purposes...which may vary from the original PYNQ project uses.
+HDF_PATH:pha-pynq-z2 = "pha-pynq-z2.xsa"

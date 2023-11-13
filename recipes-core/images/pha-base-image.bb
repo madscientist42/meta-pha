@@ -1,9 +1,7 @@
 # A baseline console image with a few features specified...
-
-IMAGE_FEATURES += "package-management splash ssh-server-openssh empty-root-password allow-empty-password"
-IMAGE_LINGUAS = "en-us"
-
 inherit core-image
+IMAGE_FEATURES += "package-management splash ssh-server-openssh empty-root-password allow-empty-password debug-tweaks"
+IMAGE_LINGUAS = "en-us"
 
 # Handle RPi2 boot support...
 DEPENDS:apppend:raspberrypi2 := "bcm2835-bootfiles"
@@ -13,7 +11,6 @@ DEPENDS:apppend:raspberrypi2 := "bcm2835-bootfiles"
 SYSTEM_DEVICETREE = "kernel-devicetree"
 SYSTEM_DEVICETREE:zynq = "device-tree"
 SYSTEM_DEVICETREE:zynqmp = "device-tree"
-
 
 # BSP specific (Drivers, etc...) and core OS features here...
 CORE_OS = " \
@@ -25,9 +22,6 @@ CORE_OS = " \
     pkgconfig \
     bash \
     eudev \
-    udev-rules-rpi \
-    linux-firmware-ralink \
-    linux-firmware-bcm43430 \
     bluez5 \
     bluez5-noinst-tools \
     batctl \
@@ -37,14 +31,20 @@ CORE_OS = " \
     dtbocfg \
     pha-svcs \
     target-dtbos \
+    ncdu \
+    procrank \
     "
 
 # Remove a few things from above IF we're running an X86_64 QEMU or similar
-CORE_OS:remove:qemux86-64 = " rtl88x2bu"
 CORE_OS:remove:qemux86-64 = " dtbocfg"
 CORE_OS:remove:qemux86-64 = " kernel-devicetree"
 CORE_OS:remove:intel-corei7-64 = " dtbocfg"
 CORE_OS:remove:intel-corei7-64 = " kernel-devicetree"
+
+# Also remove a few things from above IF we're on a Xilinx platform.
+# (Their fork of the Kernel has their OWN version of this functionality.)
+CORE_OS:remove:zynq = " dtbocfg"
+CORE_OS:remove:zynqmp = " dtbocfg"
 
 # Higher-level network stuff, but not things like webservers (Those are
 # apps and external tools...)
@@ -58,10 +58,10 @@ NET_SUPPORT = " \
     openssh-misc \
     openssh-keygen \
     tcpdump \
+    bridge-utils \
     connman \
     connman-tools \
     connman-client \
-    bridge-utils \
     f2fs-tools \
     "
 
@@ -71,13 +71,9 @@ WIFI_SUPPORT = " \
     iwd \
     "
 
-#
-# Pulled for now.  Doesn't really belong in this
-# for a non-wayland/non-X11 system...
-#
-#     glmark2
-#
-TEST_SUPPORT = " \
+# General benchmarking items...
+BENCHMARK_SUPPORT = ""
+BENCHMARK_SUPPORT:benchmark = " \
     iperf3 \
     bonnie++ \
     iozone3 \
@@ -107,19 +103,22 @@ EXTRA_TOOLS_INSTALL = " \
     zip \
     "
 
-# Break out FPGA support...
-XILINX_SUPPORT = " \
+# Break out additional FPGA support...  (FIXME : Need to make this be
+# a bit more Xilinx specific so that a Zynq/ZynqMP/Versal can trigger
+# the current ones.  That being said, this is pretty much a ONE-STOP-SHOP.
+# It will now let you use either first-stage bootloader and load the FPGA
+# as a task item in LINUX instead of the bootloader.  Just feed it the 
+# external-hdf as a .bbappend, reference xilinx-fpga-firmware and GO.)
+FPGA_SUPPORT = " \
     fpga-manager-script \
+    xilinx-fpga-firmware \
     "
 
-FPGA_SUPPORT = ""
-FPGA_SUPPORT:zynq = "${XILINX_SUPPORT}"
-FPGA_SUPPORT:zynqmp = "${XILINX_SUPPORT}"
-
+# Define out the image install from the above lists...
 IMAGE_INSTALL += " \
     ${CORE_OS} \
     ${EXTRA_TOOLS_INSTALL} \
-    ${TEST_SUPPORT} \
+    ${BENCHMARK_SUPPORT} \
     ${NET_SUPPORT} \
     ${WIFI_SUPPORT} \
     ${FPGA_SUPPORT} \
@@ -133,6 +132,6 @@ TOOLCHAIN_HOST_TASK += " \
 inherit extrausers
 EXTRA_USERS_PARAMS = " \
     useradd log; \
-    usermod -p $(openssl passwd toor) root; \
+    groupadd wheel; \
+    groupadd netdev; \
     "
-

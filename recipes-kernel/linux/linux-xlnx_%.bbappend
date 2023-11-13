@@ -4,3 +4,7 @@
 # config frags for this recipe into this .bbappend dir.
 LOCAL_FILES_PATH := "${THISDIR}/${PN}"
 inherit pha-menuconfig
+
+SRC_URI += " \
+    file://fpgamanager_enables.cfg \
+    "

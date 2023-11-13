@@ -1,0 +1,33 @@
+From c3f03a840971191962c09c545c04364437612db2 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Mon, 6 Nov 2023 12:26:28 -0600
+Subject: Fix builds- we didn't want/need manpages.
+
+- This is an embedded target system...if we need a manpage
+  they can...for now..add it themselves with a .bbappend
+
+diff --git a/Makefile.am b/Makefile.am
+index 71c12d4..a1ffa0f 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -35,14 +35,15 @@ noinst_HEADERS=\
+ 	src/path.h\
+ 	src/util.h
+ 
+-
+-man_MANS=ncdu.1
+-EXTRA_DIST=ncdu.1 doc/ncdu.pod
++# Fix it so it's not trying to make manpage stuff...we're embedded and
++# unless someone REALLY wants manpages there, they can add it themselves.
++# man_MANS=ncdu.1
++# EXTRA_DIST=ncdu.1 doc/ncdu.pod
+ 
+ # Don't "clean" ncdu.1, it should be in the tarball so that pod2man isn't a
+ # build dependency for those who use the tarball.
+-ncdu.1: $(srcdir)/doc/ncdu.pod
+-	pod2man --center "ncdu manual" --release "@PACKAGE@-@VERSION@" "$(srcdir)/doc/ncdu.pod" >ncdu.1
++# ncdu.1: $(srcdir)/doc/ncdu.pod
++# 	pod2man --center "ncdu manual" --release "@PACKAGE@-@VERSION@" "$(srcdir)/doc/ncdu.pod" >ncdu.1
+ 
+ # This target exists more for documentation purposes than actual use; some
+ # dependencies have minor ncdu-specific changes.

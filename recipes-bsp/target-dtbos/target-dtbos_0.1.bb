@@ -1,4 +1,6 @@
-DESCRIPTION = "DTBOs for varying target systems. This is more a template for using pha-dtbo.bbclass than anything else."
+DESCRIPTION = " \
+    DTBOs for varying target systems. This is more a template for using \
+    pha-dtbo.bbclass than anything else right now."
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e5d0d4c2085d8b121508a347bfcdc057"

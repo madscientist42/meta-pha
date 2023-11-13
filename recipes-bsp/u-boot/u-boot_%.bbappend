@@ -1,12 +1,10 @@
-# Just in case we have to add patches later.  This needed the expansion
-# below to properly follow Python 3.X support for build that also used
-# recipe specific sysroot support.  You never know with this stuff
-# Since people are lagging a bit on OE and we're working on latest (But
-# not bleeding edge...)
-FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+# This sequence handles the FILESEXTRAPATHS:prepend FOR you so it can handle things.
+# IF you don't specify LOCAL_FILES_PATH, it blows up on you- use what you'd use here
+# for this and the .bbclass will handle it for you and allow you to generate
+# config frags for this recipe into this .bbappend dir.
+LOCAL_FILES_PATH := "${THISDIR}/files"
+inherit pha-menuconfig
 
-# "Fix" things for Python 3.X support...this will periodically break but until
-# we can un-pooch this build process so it can use stock U-Boot's build and
-# do the right things for this image, we'll live with it.
-BUILD_CFLAGS += "  -I${RECIPE_SYSROOT_NATIVE}/usr/include/python3.7m "
-
+# Add config fragments and patches as needed for this layer to here.
+SRC_URI += " \
+    "
