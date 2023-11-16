@@ -8,29 +8,26 @@ LICENSE = "CLOSED"
 
 # Do a bit of yocto legerdemain...select which inherit we 
 # do based off of said families...  It's all the same recipe
+# (Note the Anonymous python function just above- this must follow
+# that for this all to WORK.  We will also bring in our
+# HDF wrapper .bbclass to point things to the right places.
 INHERIT_CLASS = ""
 INHERIT_CLASS:zynq = "dfx_dtg_zynq_full"
 INHERIT_CLASS:zynqmp = "dfx_dtg_zynqmp_full"
 INHERIT_CLASS:versal = "dfx_dtg_versal_full"
-inherit ${INHERIT_CLASS}
+inherit ${INHERIT_CLASS} pha-hdf
 
-# Baseline is not compatible.  Let's add machine families here
+# Baseline is not "compatible".  Let's add machine families here
 # to the list of approved so we can actually BUILD this for 
 # our target
 COMPATIBLE_MACHINE:zynq = "zynq"
 COMPATIBLE_MACHINE:zynqmp = "zynqmp"
 COMPATIBLE_MACHINE:versal = "versal"
 
-# We're going to look in the deploy directory directly...
-# it all got put in by way of the external-hdf for us to
-# use here the "right" way...
-FILESEXTRAPATHS:prepend := "${DEPLOY_DIR}/images/${MACHINE}:"
-
-# This is generic for any FPGA, perversely.  It's the name Xilinx
-# chose to use to gather up the contents from the .xsa so they could
-# make it utterly generic for their parts.  So, now, we do it for
-# OURS.
 DEPENDS += "virtual/hdf"
+
 SRC_URI += " \
-    file://Xilinx-${MACHINE}.xsa \
+    file://${TARGET_HDF_FILE} \
     "
+
+
