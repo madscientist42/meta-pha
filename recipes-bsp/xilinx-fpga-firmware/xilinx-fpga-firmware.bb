@@ -6,11 +6,11 @@ DESCRIPTION = "FPGA Firmware Bundler for Xilinx Systems"
 # cases, the binary is NOT under a FOSS license.
 LICENSE = "CLOSED"
 
-# Do a bit of yocto legerdemain...select which inherit we 
+# Do a bit of Yocto legerdemain...select which inherit we 
 # do based off of said families...  It's all the same recipe
-# (Note the Anonymous python function just above- this must follow
-# that for this all to WORK.  We will also bring in our
-# HDF wrapper .bbclass to point things to the right places.
+# for the purposes of how things get done for an MPSoC or a Versal.
+# We just use this HDF wrapper .bbclass to point things to 
+# the right places.
 INHERIT_CLASS = ""
 INHERIT_CLASS:zynq = "dfx_dtg_zynq_full"
 INHERIT_CLASS:zynqmp = "dfx_dtg_zynqmp_full"
