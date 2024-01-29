@@ -3,10 +3,11 @@
 # output.  That's all context and nothing more.  We only care about where it's
 # going to.  "is not set" or similar equals "=n" in this syntax, so we're transforming
 # that to the other.
-/+CONFIG/ {
+/+CONFIG/ || /+# CONFIG/  {
     # Config fragment.  Process this line accordingly...  Strip the +, find out if
     # we need more transforms and then print after done.
     gsub(/\+/, "")
+    gsub(/# /, "")
     gsub(/ is not set/, "=n")
     print $0
 }
