@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2278eb2755b451372dde7ffeae8cde98"
 S = "${WORKDIR}/git"
 
 SRC_URI = "\
-    git://github.com/jedisct1/libsodium.git;protocol=https \
+    git://github.com/jedisct1/libsodium.git;protocol=https;branch=master \
     "
 
 SRCREV = "${PV}"

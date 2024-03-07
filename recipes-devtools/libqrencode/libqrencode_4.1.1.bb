@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-	git://github.com/fukuchi/libqrencode.git;protocol=https \
+	git://github.com/fukuchi/libqrencode.git;protocol=https;branch=master \
     "
 
 SRCREV = "v${PV}"

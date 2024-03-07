@@ -11,7 +11,7 @@ inherit go-mod
 GO_IMPORT = "github.com/rfjakob/gocryptfs"
 
 SRC_URI = " \
-    git://${GO_IMPORT};protocol=https \
+    git://${GO_IMPORT};protocol=https;branch=master \
     "
 
 SRCREV = "v${PV}"

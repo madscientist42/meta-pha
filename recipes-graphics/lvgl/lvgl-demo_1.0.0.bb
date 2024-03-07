@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE"
 
 SRCREV = "${PV}"
 SRC_URI = " \
-    git://github.com/madscientist42/lvgl-demo.git;protocol=https \
+    git://github.com/madscientist42/lvgl-demo.git;protocol=https;branch=master \
     "
 
 inherit cmake

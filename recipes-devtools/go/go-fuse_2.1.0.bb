@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=430d04ce687760975ee4d1833cfd5d4f"
 GO_IMPORT = "github.com/hanwen/go-fuse"
 
 SRC_URI = " \
-    git://${GO_IMPORT} \
+    git://${GO_IMPORT};protocol=https;branch=master \
     "
 
 SRCREV = "v${PV}"

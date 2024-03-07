@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6fee026f0b48abb4d7cd72e25032503c"
 GO_IMPORT = "github.com/rfjakob/eme"
 
 SRC_URI = " \
-    git://${GO_IMPORT};protocol=https \
+    git://${GO_IMPORT};protocol=https;branch=master \
     "
 
 SRCREV = "v${PV}"

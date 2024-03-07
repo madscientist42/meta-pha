@@ -10,7 +10,7 @@ DEPENDS = "fuse rlog openssl boost"
 RDEPENDS:${PN} = "fuse rlog openssl boost"
 
 SRC_URI = "\
-	  git://github.com/vgough/encfs.git;protocol=https \
+	  git://github.com/vgough/encfs.git;protocol=https;branch=master \
 	  file://cmakelists_correction.patch \
           "
 
