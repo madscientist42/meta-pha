@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e77fe93202736b47c07035910f47974a"
 S = "${WORKDIR}/git"
 
 SRC_URI = "\
-	  git://github.com/vgough/rlog.git;protocol=https \
-          "
+    git://github.com/vgough/rlog.git;protocol=https;branch=master \
+    "
 
 SRCREV = "040240df98ba5f9d581d556bde7692e0f5a8c217"
 

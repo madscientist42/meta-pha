@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2f6bda03240fed3aad412fa763388c5"
 S = "${WORKDIR}/git"
 
 SRC_URI = "\
-	git://github.com/gkostka/lwext4.git;protocol=https \
+	git://github.com/gkostka/lwext4.git;protocol=https;branch=master \
     file://cmake_install_target_fix.patch \
     "
 
