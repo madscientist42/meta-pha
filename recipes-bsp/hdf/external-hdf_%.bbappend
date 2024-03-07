@@ -4,7 +4,7 @@
 inherit pha-hdf
 
 # Declare out our specifications for the .xsa that belongs
-# to our various machines in this layer...  The .bbclass specs 
+# to our various machines in this layer...  The .bbclass specs
 # this out for us for consistency sake.
 HDF_BASE = "file://"
 HDF_PATH = "${TARGET_HDF_PATH}/${TARGET_HDF_FILE}"
