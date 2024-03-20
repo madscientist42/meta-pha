@@ -6,7 +6,7 @@ IMAGE_LINGUAS = "en-us"
 # Handle RPi2 boot support...
 DEPENDS:apppend:raspberrypi2 := "bcm2835-bootfiles"
 
-# Handle hooking the right Device Tree recipe to handle this for 
+# Handle hooking the right Device Tree recipe to handle this for
 # normal systems and at least the Xilinx systems...
 SYSTEM_DEVICETREE = "kernel-devicetree"
 SYSTEM_DEVICETREE:zynq = "device-tree"
@@ -107,7 +107,7 @@ EXTRA_TOOLS_INSTALL = " \
 # a bit more Xilinx specific so that a Zynq/ZynqMP/Versal can trigger
 # the current ones.  That being said, this is pretty much a ONE-STOP-SHOP.
 # It will now let you use either first-stage bootloader and load the FPGA
-# as a task item in LINUX instead of the bootloader.  Just feed it the 
+# as a task item in LINUX instead of the bootloader.  Just feed it the
 # external-hdf as a .bbappend, reference xilinx-fpga-firmware and GO.)
 FPGA_SUPPORT = " \
     fpga-manager-script \
@@ -121,6 +121,14 @@ IMAGE_INSTALL += " \
     ${BENCHMARK_SUPPORT} \
     ${NET_SUPPORT} \
     ${WIFI_SUPPORT} \
+    "
+
+# Add in for the only FPGA SOC target we have for right now so it's
+# as described above.  Plug and play, just build and go.  We'll
+# clean this up better later.  Otherwise this is *BROKEN* for any
+# person trying to use this build recipe that doesn't build for
+# one of our supported FPGA targets.
+IMAGE_INSTALL:append:pha-fpga  = " \
     ${FPGA_SUPPORT} \
     "
 
