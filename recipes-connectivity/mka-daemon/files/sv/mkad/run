@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Check to see if the desired functionality is present...networking 
+# needs to be fully up...if not, bail, restart.  (FIXME : We don't
+# have a good hook for some of this right now- so we're going to 
+# simply do the braindead thing about waiting until eth1 (USB NIC...)
+# shows up for now..)
+ip link show | grep -q eth1
+[ $? ! eq 0 ] && exit 1
+
+
+# Check to see if there's any configs for debug level set...and then
+# default if not provisioned out with the verbosity setting.
+[ -e /etc/default/mkad ] && . /etc/default/mkad
+[ -z "${MKAD_VERBOSITY}" ] && MKAD_VERBOSITY=3
+
+# Start the service with the pre-defined config file path and in foreground...
+exec /usr/bin/mkad -f -v $MKAD_VERBOSITY -c /etc/mkad/mkad.conf &2>&1 

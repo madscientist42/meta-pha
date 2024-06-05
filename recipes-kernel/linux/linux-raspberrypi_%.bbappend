@@ -10,6 +10,7 @@ SRC_URI:append := " \
 	file://ADS1015_support.cfg \
 	file://hauppauge_usb_tuner.cfg \
     file://fbtft.cfg \
+    file://enable-macsec.cfg \
 	"
 
 # Set the crypto support where we want it for the kernel.
