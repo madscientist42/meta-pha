@@ -1,0 +1,29 @@
+From d31b85492fbd9527db90c079f0377a3edc05b6fb Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Thu, 6 Jun 2024 22:29:04 -0500
+Subject: Nerf the commentary for file source
+
+- Generator injects TMPDIR into sources, which is a
+  flat-out NO-NO.
+
+diff --git a/src/generate_codebook.c b/src/generate_codebook.c
+index d9ec838..c2dae4a 100644
+--- a/src/generate_codebook.c
++++ b/src/generate_codebook.c
+@@ -154,12 +154,14 @@ int main(int argc, char **argv) {
+ 
+   printf(header);
+   for (i = 0; i < argc - 2; i++) {
+-    printf("  /* %s */\n", argv[i + 2]);
++    // Turn this **OFF**!  We get TMPDIR leakage into the sources under Yocto with this.
++    // printf("  /* %s */\n", argv[i + 2]);
+     dump_array(cb[i], i);
+   }
+   printf("\nconst struct lsp_codebook %s[] = {\n", argv[1]);
+   for (i = 0; i < argc - 2; i++) {
+-    printf("  /* %s */\n", argv[i + 2]);
++    // Turn this **OFF**!  We get TMPDIR leakage into the sources under Yocto with this.
++    // printf("  /* %s */\n", argv[i + 2]);
+     dump_structure(cb[i], i);
+     printf(",\n");
+   }

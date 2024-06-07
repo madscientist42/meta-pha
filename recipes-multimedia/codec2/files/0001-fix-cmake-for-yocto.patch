@@ -1,0 +1,96 @@
+From f08188c6e318d7620ad120e60171914775342c0d Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Thu, 6 Jun 2024 21:53:00 -0500
+Subject: Fix the CMake to build right under Yocto...
+
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index fb10d28..5dc03c8 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -61,32 +61,38 @@ set(CODEBOOKSNEWAMP2_ENERGY
+     ${D}/newamp2_energy_q.txt
+ )
+ 
++# FIXME : Cripple all of this and re-do to make it play properly with Yocto.
++#         This gets VERY confused when it tries to build the native codegens
++#         within that sandbox.  SO...we're going to rip all of that out
++#         kicking and screaming and just build the codegens and install that
++#         as a part of the packaging rules so we get them in the -native
++#         and it's a stripped-out item on -target.
++#
+ # when crosscompiling we need a native executable
+-if(CMAKE_CROSSCOMPILING)
+-    set(CMAKE_DISABLE_SOURCE_CHANGES OFF)
+-    include(ExternalProject)
+-    ExternalProject_Add(codec2_native
+-       SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..
+-       BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/codec2_native
+-       BUILD_COMMAND ${CMAKE_COMMAND} --build . --target generate_codebook
+-       INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/codec2_native/src/generate_codebook ${CMAKE_CURRENT_BINARY_DIR}
+-       BUILD_BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/generate_codebook
+-    )
+-    add_executable(generate_codebook IMPORTED)
+-    set_target_properties(generate_codebook PROPERTIES
+-        IMPORTED_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/generate_codebook)
+-    add_dependencies(generate_codebook codec2_native)
+-    set(CMAKE_DISABLE_SOURCE_CHANGES ON)
+-else(CMAKE_CROSSCOMPILING)
+-# Build code generator binaries. These do not get installed.
+-    # generate_codebook
+-    add_executable(generate_codebook generate_codebook.c)
+-    target_link_libraries(generate_codebook m)
+-    # Make native builds available for cross-compiling.
+-    export(TARGETS generate_codebook
+-        FILE ${CMAKE_BINARY_DIR}/ImportExecutables.cmake)
+-endif(CMAKE_CROSSCOMPILING)
+-
++# if(CMAKE_CROSSCOMPILING)
++#     set(CMAKE_DISABLE_SOURCE_CHANGES OFF)
++#     include(ExternalProject)
++#     ExternalProject_Add(codec2_native
++#        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..
++#        BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/codec2_native
++#        BUILD_COMMAND ${CMAKE_COMMAND} --build . --target generate_codebook
++#        INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/codec2_native/src/generate_codebook ${CMAKE_CURRENT_BINARY_DIR}
++#        BUILD_BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/generate_codebook
++#     )
++#     add_executable(generate_codebook IMPORTED)
++#     set_target_properties(generate_codebook PROPERTIES
++#         IMPORTED_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/generate_codebook)
++#     add_dependencies(generate_codebook codec2_native)
++#     set(CMAKE_DISABLE_SOURCE_CHANGES ON)
++# else(CMAKE_CROSSCOMPILING)
++# # Build code generator binaries. These do not get installed.
++#     # generate_codebook
++#     add_executable(generate_codebook generate_codebook.c)
++#     target_link_libraries(generate_codebook m)
++#     # Make native builds available for cross-compiling.
++#     export(TARGETS generate_codebook
++#         FILE ${CMAKE_BINARY_DIR}/ImportExecutables.cmake)
++# endif(CMAKE_CROSSCOMPILING)
+ 
+ # codebook.c
+ add_custom_command(
+@@ -272,6 +278,12 @@ export(TARGETS codec2
+     FILE ${CMAKE_BINARY_DIR}/codec2.cmake
+ )
+ 
++#===================================================================================
++# generate_codebook - Do this because we need it period.  We can deal with it post-build
++# in Yocto.
++add_executable(generate_codebook generate_codebook.c)
++target_link_libraries(generate_codebook m)
++
+ add_executable(c2enc c2enc.c)
+ target_link_libraries(c2enc codec2)
+ 
+@@ -385,3 +397,8 @@ install(TARGETS codec2 EXPORT codec2-config
+     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/codec2 COMPONENT dev
+ )
++
++# Add a nasty thing after this to allow us to add the codebook gen for
++# install...this lets us swedge this into a -native story to build the
++# target...
++install(TARGETS generate_codebook DESTINATION ${CMAKE_INSTALL_BINDIR})
