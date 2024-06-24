@@ -13,6 +13,13 @@ SYSTEM_DEVICETREE:zynq = "device-tree"
 SYSTEM_DEVICETREE:zynqmp = "device-tree"
 
 # BSP specific (Drivers, etc...) and core OS features here...
+#
+# FIXME - Need to make a cleaner way to support DTBO configuration
+# support (6.x kernels appear to provide CONFIG_OF_CONFIGFS support
+# with at least some of the kernels PHA Linux supports...) Peeled
+# dtbocfg out of play- needs code patching and needs posisble revisiting
+# as it may not be needed now.  meta-runit handles driving EITHER way
+# of doing this anyhow at this time.
 CORE_OS = " \
     packagegroup-core-boot \
     packagegroup-base \
@@ -28,7 +35,6 @@ CORE_OS = " \
     boost \
     rpe-tools \
     brcm-patchram-plus \
-    dtbocfg \
     pha-svcs \
     target-dtbos \
     ncdu \
