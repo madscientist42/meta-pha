@@ -37,7 +37,6 @@ RDEPENDS:${PN} = " \
 SRC_URI = " \
     gitsm://github.com/Technica-Engineering/MKAdaemon.git;protocol=https;branch=main \
     file://sv/mkad/run \
-    file://sv/mkad/finish \
     "
 
 # Pull from tip...  (FIXME:We have to use the full SRCREV for PV because of a bug.)
