@@ -23,6 +23,8 @@ DEPENDS = " \
     openssl \
     "
 
+# FIXME - We're going to use Expect to hook this silly thing.  It wants a console
+# in foreground mode to STAY there.  (Sigh...)
 RDEPENDS:${PN} = " \
     glib-2.0 \
     libbsd \
@@ -35,11 +37,12 @@ RDEPENDS:${PN} = " \
 SRC_URI = " \
     gitsm://github.com/Technica-Engineering/MKAdaemon.git;protocol=https;branch=main \
     file://sv/mkad/run \
+    file://sv/mkad/finish \
     "
 
-# Pull from tip...
+# Pull from tip...  (FIXME:We have to use the full SRCREV for PV because of a bug.)
 SRCREV = "9c53cd5e62363013e99c3bc4a0f6995a5704672d"
-PV = "git+${@bb.fetch2.get_srcrev(d)}"
+PV = "git+${SRCREV}"
 
 S = "${WORKDIR}/git"
 
