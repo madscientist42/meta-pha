@@ -63,7 +63,9 @@ NET_SUPPORT = " \
     connman-tools \
     connman-client \
     f2fs-tools \
+    iproute2 \
     "
+
 
 # Core WiFi tools and features...
 WIFI_SUPPORT = " \

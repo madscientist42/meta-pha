@@ -7,4 +7,5 @@ inherit pha-menuconfig
 
 SRC_URI:append = " \
     file://enable_timeout_cmd.cfg \
+    file://disable_iproute2.cfg \
     "
