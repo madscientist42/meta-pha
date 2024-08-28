@@ -8,7 +8,8 @@ SRC_URI = "\
     "
 
 SRCREV = "98792b55c2ebf4ab4cafffb0780e0c4185fdc03d"
-PV = "git+${SRCPV}"
+
+inherit pha-shorthash
 
 RDEPENDS:${PN} = "bash"
 

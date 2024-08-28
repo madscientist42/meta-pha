@@ -18,9 +18,8 @@ SRC_URI = " \
 # same.  Will make a clean workaround shortly for this to use the
 # short form hashing.
 SRCREV = "639a0c73903e93a557d4084de9d58539a2c885b8"
-PV = "git+${SRCREV}"
 
-inherit cmake
+inherit cmake pha-shorthash
 
 PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
 

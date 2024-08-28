@@ -15,10 +15,9 @@ SRC_URI = "\
     "
 
 SRCREV = "bf69b54f64003d160d759068f4816b2d9b2e1e21"
-PV = "git+${SRCPV}"
 
 # Builds with autotools...
-inherit autotools
+inherit autotools pha-shorthash
 
 # But, use the autogen.sh scripting first...
 do_configure:prepend() {

@@ -61,14 +61,10 @@ SRCREV = "428a46e4eab939a63c9173324304a540c4ca8ca3"
 # (Yes, there's no official tip right now other than the above...)
 
 S = "${WORKDIR}/git"
-PV = "git+${SRCPV}"
 
-DEPENDS = "virtual/kernel"
-
-inherit module
+inherit module pha-shorthash
 
 EXTRA_OEMAKE = "-C ${STAGING_KERNEL_BUILDDIR} ARCH=${ARCH} M=${S}"
-
 
 do_install () {
     install -d ${D}/lib/modules/${KERNEL_VERSION}

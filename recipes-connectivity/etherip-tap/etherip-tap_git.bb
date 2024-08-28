@@ -7,8 +7,10 @@ SRC_URI = " \
     file://sv/etherip/run \
     "
 SRCREV = "69bf0aeebf77ba2c7657e512eb4d15d5f79d2054"
-PV = "git+${SRCREV}"
+# FIXME : This is convoluted...but it works right with a short-hash....probably need to condense
+# this into a Pythonic function that we get at globally from our .bbclass-es.
+PV = "1.0+git"
 S = "${WORKDIR}/git"
 
-inherit cmake runit
+inherit cmake runit pha-shorthash
 

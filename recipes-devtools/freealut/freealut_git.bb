@@ -14,6 +14,5 @@ SRC_URI = "\
           "
 
 SRCREV = "fc814e316c2bfa6e05b723b8cc9cb276da141aae"
-PV = "git+${SRCPV}"
 
-inherit cmake
+inherit cmake pha-shorthash
