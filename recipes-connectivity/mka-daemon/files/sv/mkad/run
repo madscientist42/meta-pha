@@ -1,13 +1,5 @@
 #!/bin/sh
 
-# Check to see if the desired functionality is present...networking 
-# needs to be fully up...if not, bail, restart.  (FIXME : We don't
-# have a good hook for some of this right now- so we're going to 
-# simply do the braindead thing about waiting until eth1 (USB NIC...)
-# shows up for now..)
-ip link show | grep -q eth1
-[ $? ! eq 0 ] && exit 1
-
 # Start the service with the pre-defined config file path and in foreground...
 exec mkad -f -c /etc/mkad/mkad.conf
 

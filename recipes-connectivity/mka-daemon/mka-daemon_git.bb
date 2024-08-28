@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=75859989545e37968a99b631ef42722e"
 # a runit specific packaging (If you're not using runit, you'll want to
 # crib from it and extend support for systemd, sysvinit, etc.)  Being that
 # it self starts, you will want to provide a config file in /etc/mkad per
-# the project's config requirements.
+# the project's config requirements.  This is distinct and separate from
+# the recipe's output and needs to be in a differing recipe.
 inherit waf pkgconfig runit
 
 # Runtime dependencies...note, if you're getting FIPS certification, you're probably
@@ -42,6 +43,7 @@ SRC_URI = " \
 # Pull from tip...  (FIXME:We have to use the full SRCREV for PV because of a bug.)
 SRCREV = "9c53cd5e62363013e99c3bc4a0f6995a5704672d"
 PV = "git+${SRCREV}"
+PR = "r4"
 
 S = "${WORKDIR}/git"
 

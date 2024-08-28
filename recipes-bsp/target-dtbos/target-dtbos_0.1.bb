@@ -5,6 +5,8 @@ DESCRIPTION = " \
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e5d0d4c2085d8b121508a347bfcdc057"
 
+PR = "r1"
+
 # Handle this as a dtbo builder recipe.  We'll be supporting autoload of those here
 # in a little bit in PHA Linux.
 inherit pha-dtbo
@@ -33,9 +35,11 @@ SRC_URI = " \
 # PI 2, 3, or 4 specific DTBOs.  These are expressions that can't be generic, per se, but
 # can be similar across devices...they comprise specific SPI, I2C paths, etc. for a
 # given device attached to these class of machines.
+#
+# FIXME - right now we're going to turn some of this off to get some other panels
+#         going
 SRC_URI:append:rpi = " \
-    file://waveshare-oled-display.dts \
-    file://waveshare-eink-display.dts \
+    file://waveshare-28lcd-display.dts \
     "
 
 

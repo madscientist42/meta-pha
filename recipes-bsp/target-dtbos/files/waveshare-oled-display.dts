@@ -11,7 +11,7 @@
 
 / {
 
-    compatible = "brcm,bcm2835";
+	compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";
 
     /* Button panels overlay - We have a set of three and a joypad with a center click */
     fragment@0 {

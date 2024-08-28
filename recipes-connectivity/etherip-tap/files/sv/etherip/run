@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Check for config...if it's not there don't start...
+if [ ! -e /etc/default/etherip ] ; then
+    exit 1  
+else 
+    source /etc/default/etherip
+fi
+
+# Check to see if tap0 is there or not- if not, make it happen...  This doesn't care
+# if it's a participant of the bridge and we're going to PoC this.
+[ ! -e /dev/net/tap0 ] && ip tuntap add mode tap dev tap0 && ip link set tap0 up
+
+# Presume the IPs defined are there.  Breaks nothing on boot- it may just not work
+# right on bridging, etc until we boot up with everything right.
+exec etherip ipv4 src $SRCIP dst $DSTIP tap tap0 
